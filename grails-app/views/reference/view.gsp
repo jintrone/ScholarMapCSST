@@ -131,7 +131,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Position</th>
-                                        <th>Department</th>
+                                        <th>Institution</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -145,7 +145,7 @@
                                                 </g:link>
                                             </td>
                                             <td>${user.position?.name}</td>
-                                            <td>${user.department?.title}</td>
+                                            <td>${user.currentInstitution}</td>
                                         </tr>
                                     </g:each>
                                     </tbody>

@@ -11,6 +11,7 @@
     <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}">
     <asset:stylesheet src="application.css"/>
 
+
 </head>
 
 <body>
@@ -98,6 +99,7 @@
     <g:layoutBody/>
     <g:render template="/utils/hiddenLinks"/>
     <asset:javascript src="application.js"/>
+
 
 </div>
 

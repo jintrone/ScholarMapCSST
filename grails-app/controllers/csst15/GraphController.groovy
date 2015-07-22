@@ -83,7 +83,7 @@ class GraphController extends RestfulController {
             nodes(
                     referencesAuthor.reference.unique().collect { Reference reference ->
                         def authors = referencesAuthor.findAll { ReferenceAuthor refAuth -> refAuth.reference == reference }.author
-                        def authorStr = Joiner.on(",").join(authors.firstName)
+                        def authorStr = Joiner.on(",").join(authors.lastName)
                         def entities = referencesVote.findAll { ReferenceVote refVote -> refVote.reference == reference }.entity
                         def methods = entities.findAll { Entity method -> method.type == csst15.constants.EntityType.METHOD }.unique()
                         def theories = entities.findAll { Entity theory -> theory.type == csst15.constants.EntityType.THEORY }.unique()
@@ -93,7 +93,7 @@ class GraphController extends RestfulController {
                                 citation    : reference.citation,
                                 year        : reference.year,
                                 authors: authorStr,
-                                department  : reference.creator?.department?.title ?: "",
+                                //institution  : reference.creator?.currentInstitution?: "",
                                 relative_url: csst15.GeneralUtils.constructReferenceUrl("reference", ReferenceAuthor.findByReference(reference).author.lastName + reference.year + reference.hash),
                                 methods     : (methods.id),
                                 fields      : (fields.id),
@@ -140,14 +140,14 @@ class GraphController extends RestfulController {
                     }
                 }
 
-                "people" {
-                    users.collect { user ->
-                        "${user.id}" {
-                            name "${user.firstName} ${user.lastName}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl("user", user.username)}"
-                        }
-                    }
-                }
+//                "people" {
+//                    users.collect { user ->
+//                        "${user.id}" {
+//                            name "${user.firstName} ${user.lastName}"
+//                            relative_url "${csst15.GeneralUtils.constructReferenceUrl("user", user.username)}"
+//                        }
+//                    }
+//                }
             }
         }
 
@@ -172,7 +172,8 @@ class GraphController extends RestfulController {
                         def userVenues = UserEntity.findAllByUser(u).entity.findAll { Entity venue -> venue.type == csst15.constants.EntityType.VENUE }.unique()
                         [
                                 name        : u.firstName + " " + u.lastName,
-                                department  : u.department?.title ?: "",
+                                institution  : u.currentInstitution?: "",
+                                position    : u.position?.name?:"",
                                 relative_url: csst15.GeneralUtils.constructReferenceUrl("user", u.username),
                                 methods     : (userMethods.id),
                                 fields      : (userFields.id),
@@ -219,14 +220,14 @@ class GraphController extends RestfulController {
                     }
                 }
 
-                "references" {
-                    allReferences.collect { reference ->
-                        "${reference.id}" {
-                            name "${reference.citation}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl("reference", ReferenceAuthor.findByReference(reference)?.author?.lastName ?: '' + reference?.year + reference?.hash)}"
-                        }
-                    }
-                }
+//                "references" {
+//                    allReferences.collect { reference ->
+//                        "${reference.id}" {
+//                            name "${reference.citation}"
+//                            relative_url "${csst15.GeneralUtils.constructReferenceUrl("reference", ReferenceAuthor.findByReference(reference)?.author?.lastName ?: '' + reference?.year + reference?.hash)}"
+//                        }
+//                    }
+//                }
             }
         }
 

@@ -15,11 +15,12 @@ class LoadUserCommand {
     String email
     String firstName
     String lastName
-    String institution
+    String degreeInstitution
     Integer degreeYear
-    String specialization
+    //String specialization
     String position
-    String department
+    String schoolOrDepartment
+    String currentInstitution
 
     static constraints = {
         username blank: false, unique: true
@@ -38,28 +39,36 @@ class LoadUserCommand {
                     return ['lastName.required']
             }
         }
-        institution nullable: true, validator: { val, obj ->
+        currentInstitution nullable: true, validator: { val, obj ->
             FieldMandatoryConf.withNewSession { session ->
-                if (FieldMandatoryConf.findByFieldName('institution')?.isMandatory && !val)
-                    return ['institution.required']
+                if (FieldMandatoryConf.findByFieldName('currentInstitution')?.isMandatory && !val)
+                    return ['currentInstitution.required']
             }
         }
-        specialization nullable: true, validator: { val, obj ->
+
+        degreeInstitution nullable: true, validator: { val, obj ->
             FieldMandatoryConf.withNewSession { session ->
-                if (FieldMandatoryConf.findByFieldName('specialization')?.isMandatory && !val)
-                    return ['specialization.required']
+                if (FieldMandatoryConf.findByFieldName('degreeInstitution')?.isMandatory && !val)
+                    return ['degreeInstitution.required']
             }
         }
+
+//        specialization nullable: true, validator: { val, obj ->
+//            FieldMandatoryConf.withNewSession { session ->
+//                if (FieldMandatoryConf.findByFieldName('specialization')?.isMandatory && !val)
+//                    return ['specialization.required']
+//            }
+//        }
         position nullable: true, validator: { val, obj ->
             FieldMandatoryConf.withNewSession { session ->
                 if (FieldMandatoryConf.findByFieldName('position')?.isMandatory && !val)
                     return ['position.required']
             }
         }
-        department nullable: true, validator: { val, obj ->
+        schoolOrDepartment nullable: true, validator: { val, obj ->
             FieldMandatoryConf.withNewSession { session ->
-                if (FieldMandatoryConf.findByFieldName('department')?.isMandatory && !val)
-                    return ['department.required']
+                if (FieldMandatoryConf.findByFieldName('schoolOrDepartment')?.isMandatory && !val)
+                    return ['schoolOrDepartment.required']
             }
         }
         degreeYear nullable: true, max: LocalDate.now().year, validator: { val, obj ->

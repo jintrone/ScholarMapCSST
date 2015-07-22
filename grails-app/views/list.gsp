@@ -10,7 +10,7 @@
                 <tr>
                     <th>Username</th>
                     <th>Full Name</th>
-                    <th>Department</th>
+                    <th>Current Institution</th>
                     <th>Position</th>
                 </tr>
                 </thead>

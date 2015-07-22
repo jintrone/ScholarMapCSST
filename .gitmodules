@@ -1,0 +1,3 @@
+[submodule "grails-app/assets/javascripts/scholarmap_csst_js"]
+	path = grails-app/assets/javascripts/scholarmap_csst_js
+	url = https://github.com/danielcarter/scholarmap_csst_js

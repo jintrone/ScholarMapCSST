@@ -9,10 +9,12 @@ class FieldLockConf {
     Boolean isLastNameLocked = false
     Boolean isEmailLocked = false
     Boolean isDegreeYearLocked = false
-    Boolean isInstitutionLocked = false
-    Boolean isSpecializationLocked = false
+    Boolean isDegreeInstitutionLocked = false
+    Boolean isCurrentInstitutionLocked = false
+    Boolean isSchoolOrDepartmentLocked = false
+    //Boolean isSpecializationLocked = false
     Boolean isPositionLocked = false
-    Boolean isDepartmentLocked = false
+    //Boolean isDepartmentLocked = false
     Boolean isPhotoLocked = false
 
     static constraints = {

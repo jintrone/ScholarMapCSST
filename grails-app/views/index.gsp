@@ -80,4 +80,6 @@
         <hr>
 
     </div> <!-- /container -->
+
 </g:applyLayout>
+<asset:javascript src="scholarMapViz.js"/>

@@ -6,6 +6,9 @@ import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 import grails.util.Holders
 import groovy.util.logging.Slf4j
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UserDetails
 
 @Slf4j
 @Transactional(readOnly = true)
@@ -14,6 +17,8 @@ class AuthController {
     def springSecurityService
     def notificationService
     def userService
+    def userDetailsService
+    def userCache
 
     static allowedMethods = [signup: 'GET', forgot_password: 'GET', register: 'POST']
 
@@ -36,15 +41,25 @@ class AuthController {
                 if (Holders.config.grails.email.skip) {
                     log.debug("Skip email confirmation step. Active user")
                     user.enabled = true
+
+                    user.save()
+
+                    UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+                    SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
+                            userDetails, userDetails.getPassword(), userDetails.getAuthorities()));
+                    userCache.removeUserFromCache(user.getUsername());
+                    redirect(controller: 'user', action: 'profile', params: [username: "${user.getUsername()}"])
                 } else {
                     user.activationToken = UUID.randomUUID().toString()
                     def activationLink = createLink(absolute: true, controller: 'auth', action: 'activateuser', params: [activationToken: user.activationToken])
                     notificationService.sendActivationEmail(user, activationLink)
+                    user.save()
+                    redirect(controller: 'home')
                 }
-                user.save()
-                redirect(controller: 'home')
+
             } else {
                 log.error("Failed to register new user account")
+
                 render(view: 'signup', model: [userInstance: userCommand])
             }
         }

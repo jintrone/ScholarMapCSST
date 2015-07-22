@@ -116,8 +116,10 @@ class UserController {
         }
 
         userCommand.position = Position.findByName(params.position)
-        userCommand.specialization = Specialization.findByTitle(params.specialization)
-        userCommand.department = Department.findByTitle(params.department)
+        //userCommand.specialization = Specialization.findByTitle(params.specialization)
+        //userCommand.department = Department.findByTitle(params.department)
+
+
         if (userCommand.hasErrors()) {
             def fieldsLockConf = FieldLockConf.findByUser(user)
             def fieldsVisConf = FieldVisibilityConf.findByUser(user)
@@ -126,10 +128,10 @@ class UserController {
             if (userCommand.photo) {
                 userCommand.photo = uploadService.uploadFile(request, 'photo')
             }
-            bindData(user, params, [exclude: ['position', 'specialization', 'department']])
+            bindData(user, params, [exclude: ['position'/*, 'specialization', 'department'*/]])
             user.position = Position.findByName(params.position)
-            user.specialization = Specialization.findByTitle(params.specialization)
-            user.department = Department.findByTitle(params.department)
+            //user.specialization = Specialization.findByTitle(params.specialization)
+            //user.department = Department.findByTitle(params.department)
 
             User.withTransaction { status ->
                 try {

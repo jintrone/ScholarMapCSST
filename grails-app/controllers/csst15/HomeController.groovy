@@ -22,38 +22,36 @@ class HomeController {
     }
 
     def list() {
-        def columns = ['0': 'username', '1': 'lastName', '2': 'title', '3': 'name']
+        def columns = ['0': 'username', '1': 'lastName', '2': 'currentInstitution', '3': 'name']
         if (request.method == "POST") {
             def c = User.createCriteria()
             def allUsers = c.list(max: Integer.parseInt(params.length), offset: params.start) {
-                createAlias('department', 'd')
+                //createAlias('currentInstitution', 'i')
                 createAlias('position', 'p')
                 gt("id", 1L)
                 or {
                     ilike("username", "${params.'search[value]'}%")
                     ilike("firstName", "${params.'search[value]'}%")
                     ilike("lastName", "${params.'search[value]'}%")
-                    ilike("d.title", "${params.'search[value]'}%")
+                    ilike("currentInstitution", "${params.'search[value]'}%")
                     ilike("p.name", "${params.'search[value]'}%")
                 }
 
-                if (params.'order[0][column]' == '2') {
-                    order("d." + columns[params.'order[0][column]'], params."order[0][dir]")
-                } else if (params.'order[0][column]' == '3') {
+                 if (params.'order[0][column]' == '3') {
                     order("p." + columns[params.'order[0][column]'], params."order[0][dir]")
                 } else {
                     order(columns[params.'order[0][column]'], params."order[0][dir]")
                 }
             }
             def count = User.createCriteria().count() {
-                createAlias('department', 'd')
+               // createAlias('currentInstitution', 'i')
                 createAlias('position', 'p')
                 gt("id", 1L)
                 or {
                     ilike("username", "${params.'search[value]'}%")
                     ilike("firstName", "${params.'search[value]'}%")
                     ilike("lastName", "${params.'search[value]'}%")
-                    ilike("d.title", "${params.'search[value]'}%")
+                    ilike("currentInstitution", "${params.'search[value]'}%")
                     ilike("p.name", "${params.'search[value]'}%")
                 }
             }
@@ -67,7 +65,7 @@ class HomeController {
                                 [
                                         username  : user.username,
                                         fullName  : "${user.firstName} ${user.lastName}",
-                                        department: user.department?.title,
+                                        currentInstitution: user.currentInstitution,
                                         position  : user.position?.name
                                 ]
                             }
@@ -127,7 +125,10 @@ class HomeController {
     }
 
     def theories() {
+        println "In theories"
+        println "${request.method}"
         if (request.method == "POST") {
+            println "In post"
             def c = Entity.createCriteria()
             def allTheories = c.list(max: Integer.parseInt(params.length), offset: params.start) {
                 eq("type", EntityType.THEORY)
@@ -159,7 +160,7 @@ class HomeController {
                                 ]
                             }
             )
-
+            println "$json"
             render(json)
         } else {
             render(view: 'theories')

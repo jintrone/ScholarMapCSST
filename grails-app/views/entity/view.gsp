@@ -121,7 +121,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Position</th>
-                                        <th>Department</th>
+                                        <th>Institution</th>
                                         <th>Other ${entity.type.name}</th>
                                     </tr>
                                     </thead>
@@ -135,7 +135,7 @@
                                                 </g:link>
                                             </td>
                                             <td>${user.position?.name}</td>
-                                            <td>${user.department?.title}</td>
+                                            <td>${user.currentInstitution}</td>
                                             <g:set var="other"
                                                    value="${ReferenceVote.findAllByUserAndEntityNotEqual(user, entity).entity.unique().findAll {
                                                        it.type.equals(entity.type)

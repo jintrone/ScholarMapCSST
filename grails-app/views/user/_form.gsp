@@ -1,4 +1,4 @@
-<%@ page import="csst15.lists.Specialization; csst15.lists.Position; csst15.lists.Department" %>
+<%@ page import="csst15.lists.Position" %>
 <g:hiddenField name="userId" value="${user.id}"/>
 <div class="panel-body" data-ng-controller="signupCtrl" id="editPanel">
 
@@ -105,25 +105,46 @@
 
     <div class="form-group">
         <div class="col-sm-3">
-            <label for="">Institution</label>
+            <label for="">Degree Institution</label>
         </div>
 
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="institution" placeholder="Not set"
-                   value="${user.institution}"/>
+            <input type="text" class="form-control" name="degreeInstitution" placeholder="Not set"
+                   value="${user.degreeInstitution}"/>
         </div>
 
         <div class="col-sm-3">
-            <g:if test="${!lockConf.isInstitutionLocked}">
+            <g:if test="${!lockConf.isDegreeInstitutionLocked}">
                 <label class="switch switch-success">
                     <input type="checkbox" id="isInstitutionVisible"
-                           class="permission" ${visConf?.isInstitutionVisible ? 'checked="checked"' : ''}/><i></i>
+                           class="permission" ${visConf?.isDegreeInstitutionVisible ? 'checked="checked"' : ''}/><i></i>
                 </label>
             </g:if>
         </div>
     </div>
 
+
     <div class="form-group">
+        <div class="col-sm-3">
+            <label for="">Current Institution</label>
+        </div>
+
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="degreeInstitution" placeholder="Not set"
+                   value="${user.currentInstitution}"/>
+        </div>
+
+        <div class="col-sm-3">
+            <g:if test="${!lockConf.isCurrentInstitutionLocked}">
+                <label class="switch switch-success">
+                    <input type="checkbox" id="isCurrentInstitutionVisible"
+                           class="permission" ${visConf?.isCurrentInstitutionVisible ? 'checked="checked"' : ''}/><i></i>
+                </label>
+            </g:if>
+        </div>
+    </div>
+
+   <!-- <div class="form-group">
         <div class="col-sm-3">
             <label for="">Specialization</label>
         </div>
@@ -142,7 +163,7 @@
                 </label>
             </g:if>
         </div>
-    </div>
+    </div> -->
 
     <div class="form-group">
         <div class="col-sm-3">
@@ -167,20 +188,20 @@
 
     <div class="form-group">
         <div class="col-sm-3">
-            <label for="">Department</label>
+            <label for="">School / Department</label>
         </div>
 
+
         <div class="col-sm-6">
-            <g:select from="${Department.list().title}" noSelection="['': 'Not set']"
-                      class="form-control" name="department" placeholder="Not set"
-                      value="${user.department?.title}"/>
+            <input type="text" class="form-control" name="schoolOrDepartment" placeholder="Not set"
+                   value="${user.schoolOrDepartment}"/>
         </div>
 
         <div class="col-sm-3">
-            <g:if test="${!lockConf.isDepartmentLocked}">
+            <g:if test="${!lockConf.isSchoolOrDepartmentLocked}">
                 <label class="switch switch-success">
                     <input type="checkbox" id="isDepartmentVisible"
-                           class="permission" ${visConf?.isDepartmentVisible ? 'checked="checked"' : ''}/><i></i>
+                           class="permission" ${visConf?.isSchoolOrDepartmentVisible ? 'checked="checked"' : ''}/><i></i>
                 </label>
             </g:if>
         </div>

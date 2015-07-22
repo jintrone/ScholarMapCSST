@@ -1,7 +1,10 @@
 package csst15.auth
 
 import csst15.constants.Roles
+import csst15.security.User
 import grails.plugin.springsecurity.SpringSecurityUtils
+import grails.plugin.springsecurity.userdetails.GrailsUser
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler
 
 import javax.servlet.http.HttpServletRequest
@@ -20,7 +23,10 @@ class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHan
         if (hasAdmin) {
             return adminUrl
         } else if (hasUser) {
-            return userUrl
+            GrailsUser user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            println "${user.getUsername()}"
+            return "/user/${user.getUsername()}"
         } else {
             return super.determineTargetUrl(request, response)
         }

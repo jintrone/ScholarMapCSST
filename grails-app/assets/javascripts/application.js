@@ -7,7 +7,7 @@
 //
 //= require jquery/jquery.min.js
 //= require jquery/jquery-ui.min.js
-//= require jquery/jquery.dataTables.js
+//= require jquery/jquery.dataTables.min.js
 //= require jquery/jquery.form.min.js
 //= require jquery/select2.js
 //= require bootstrap
@@ -19,8 +19,6 @@
 //= require vendor/lodash.js
 //= require vendor/modernizr.min.js
 //= require vendor/react.js
-//= require scholarMapViz.js
-//= require_tree .
 //= require_self
 
 
@@ -81,7 +79,7 @@ $(document).ready(function () {
         }
     });
 
-
+    console.log("I am going to set data tables");
     setMethodsDataTable();
     setVenuesDataTable();
     setFieldsDataTable();
@@ -367,7 +365,7 @@ function setUsersDataTable() {
                 }
             },
             {"data": "fullName"},
-            {"data": "department"},
+            {"data": "currentInstitution"},
             {"data": "position"}
         ]
     });
@@ -396,6 +394,7 @@ function setFieldsDataTable() {
 }
 
 function setTheoriesDataTable() {
+    console.log("I am here");
     $("#allTheoriesTable").dataTable({
         "processing": true,
         "serverSide": true,
