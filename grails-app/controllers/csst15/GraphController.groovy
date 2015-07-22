@@ -84,6 +84,7 @@ class GraphController extends RestfulController {
                     referencesAuthor.reference.unique().collect { Reference reference ->
                         def authors = referencesAuthor.findAll { ReferenceAuthor refAuth -> refAuth.reference == reference }.author
                         def authorStr = Joiner.on(",").join(authors.lastName)
+                        def citationStr = "${authors.first().lastName} ${reference.year}"
                         def entities = referencesVote.findAll { ReferenceVote refVote -> refVote.reference == reference }.entity
                         def methods = entities.findAll { Entity method -> method.type == csst15.constants.EntityType.METHOD }.unique()
                         def theories = entities.findAll { Entity theory -> theory.type == csst15.constants.EntityType.THEORY }.unique()
@@ -93,6 +94,7 @@ class GraphController extends RestfulController {
                                 citation    : reference.citation,
                                 year        : reference.year,
                                 authors: authorStr,
+                                citationShort : citationStr,
                                 //institution  : reference.creator?.currentInstitution?: "",
                                 relative_url: csst15.GeneralUtils.constructReferenceUrl("reference", ReferenceAuthor.findByReference(reference).author.lastName + reference.year + reference.hash),
                                 methods     : (methods.id),

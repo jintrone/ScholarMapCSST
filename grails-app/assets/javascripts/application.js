@@ -12,13 +12,9 @@
 //= require jquery/select2.js
 //= require bootstrap
 
-//= require vendor/d3.min.js
-//= require vendor/d3.tip.js
-//= require vendor/jLouvain.js
-//= require vendor/jquery-expander.min.js
-//= require vendor/lodash.js
-//= require vendor/modernizr.min.js
-//= require vendor/react.js
+//= require scholarmap_csst_js/js/d3.min.js
+//= require scholarmap_csst_js/js/jLouvain.js
+//= require scholarmap_csst_js/js/lodash.js
 //= require_self
 
 

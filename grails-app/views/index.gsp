@@ -82,4 +82,5 @@
     </div> <!-- /container -->
 
 </g:applyLayout>
-<asset:javascript src="scholarMapViz.js"/>
+<asset:javascript src="scholarmap_csst_js/js/scholarmap.js"/>
+<asset:javascript src="kickoff.js"/>
