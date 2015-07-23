@@ -59,16 +59,17 @@
                         <section class="panel panel-default">
                             <div class="panel-heading" style="padding: 20px; height: 80px">
 
-                                <div class="col-md-9">
+                                <div class="col-md-12">
                                     <strong><span class="glyphicon glyphicon-th"></span> Available References</strong>
-                                </div>
-
-                                <div class="col-md-3">
+                                    <div class="pull-right">
                                     <sec:ifLoggedIn>
                                         <a href="javascript:void(0);" id="addNewRefBtn" class="btn btn-success"
                                            title="Create New Reference">Create New Reference</a>
                                     </sec:ifLoggedIn>
+                                    </div>
                                 </div>
+
+
                             </div>
 
                             <div class="panel-body">
@@ -150,14 +151,13 @@
             </div>
 
             <div class="col-xs-6" id="matchedRefTable">
-                <table class="table table-bordered table-hover" id="ref_tab" style="display: none">
-                    <thead>
-                    </thead>
+                <label for="">Matched References</label>
+                <table class="table table-bordered table-hover" id="ref_tab">
                     <tbody>
-                    <tr class="tempRow" style="cursor: pointer">
+                   <!-- <tr class="tempRow" style="cursor: pointer">
                         <g:hiddenField name="tempId"/>
                         <td></td>
-                    </tr>
+                    </tr>-->
                     </tbody>
                 </table>
             </div>

@@ -14,7 +14,7 @@
 *= require jquery/select2.css
 *= require jquery/select2-bootstrap.css
 *= require font-awesome
-*= require main
+*= require main.css
 *= require ../javascripts/scholarmap_csst_js/css/main.css
 *= require_self
 */

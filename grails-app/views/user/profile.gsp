@@ -61,7 +61,7 @@
                                                 <li>
                                                     <span class="icon glyphicon"></span>
                                                     <label>Department</label>
-                                                    ${user.schoolOrDepartment?.title}
+                                                    ${user.schoolOrDepartment}
                                                 </li>
                                             </g:if>
                                             <g:if test="${hasCurrentUser || user.visibilityConf.isPositionVisible}">
@@ -75,8 +75,8 @@
                                             <g:if test="${hasCurrentUser || user.visibilityConf.isDegreeInstitutionVisible}">
                                                 <li>
                                                     <span class="icon glyphicon"></span>
-                                                    <label>Current Institution</label>
-                                                    ${user.currentInstitution}
+                                                    <label>Degree Institution</label>
+                                                    ${user.degreeInstitution}
                                                 </li>
                                             </g:if>
                                             <g:if test="${hasCurrentUser || user.visibilityConf.isDegreeYearVisible}">
@@ -144,39 +144,19 @@
             <div class="panel panel-default">
                 <div class="panel-heading" style="padding: 20px; height: 80px">
 
-                    <div class="col-md-11">
+                    <div class="col-md-12">
                         <strong><span class="glyphicon glyphicon-th"></span> Interests</strong>
-                    </div>
-
-                    <div class="col-md-1">
                         <g:if test="${isOwner}">
+                            <div class="pull-right">
                             <a href="javascript:void(0);" id="addNewEntity" class="btn btn-success"
                                title="Edit">Add New</a>
+                            </div>
                         </g:if>
                     </div>
+
                 </div>
 
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        console.log("ready!");
-                        $.ajax({
-                            type: 'POST',
-                            url: "/ScholarMapClean/interests/loadInterestsRecord",
-                            data: {
-                                username: "${user?.username}"
-                            },
-                            success: function (data) {
-                                $("#interestRecords").html(data);
-                                $("#interestTable").dataTable({
-                                    "paging": false,
-                                    "ordering": true,
-                                    "info": false,
-                                    "bFilter": false
-                                });
-                            }
-                        });
-                    });
-                </script>
+
 
                 <div class="panel-body">
                     <div class="media">
@@ -192,43 +172,65 @@
         <div class="col-md-1"></div>
     </div>
 
-    <div class="modal fade" id="addInterestModal" style="display: none">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-label="Close"><span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title" id="addInterestModalLabel">Add Interest</h4>
+
+</g:applyLayout>
+<div class="modal fade" id="addInterestModal" style="display: none">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="addInterestModalLabel">Add Interest</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <g:select from="${EntityType.values().name}" noSelection="['': 'Not set']"
+                              class="form-control" name="type" placeholder="Type"/>
                 </div>
 
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="type">Type</label>
-                        <g:select from="${EntityType.values().name}" noSelection="['': 'Not set']"
-                                  class="form-control" name="type" placeholder="Type"/>
-                    </div>
-
-                    <div class="form-group ui-front">
-                        <label for="name">Name</label>
-                        <csst:autocomplete name="name" action="loadInterests" class="form-control" id="name"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea maxlength="5000" name="description" rows="10" id="description"
-                                  class="form-control"
-                                  placeholder="Not set"></textarea>
-                    </div>
-
+                <div class="form-group ui-front">
+                    <label for="name">Name</label>
+                    <csst:autocomplete name="name" action="loadInterests" class="form-control" id="name"/>
                 </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default"
-                            data-dismiss="modal">Cancel</button>
-                    <a href="javascript:void(0);" id="addInterestBtn" class="btn btn-primary">Add</a>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea maxlength="5000" name="description" rows="10" id="description"
+                              class="form-control"
+                              placeholder="Not set"></textarea>
                 </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Cancel</button>
+                <a href="javascript:void(0);" id="addInterestBtn" class="btn btn-primary">Add</a>
             </div>
         </div>
     </div>
-</g:applyLayout>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log("ready!");
+        $.ajax({
+            type: 'POST',
+            url: "/ScholarMapClean/interests/loadInterestsRecord",
+            data: {
+                username: "${user?.username}"
+            },
+            success: function (data) {
+                $("#interestRecords").html(data);
+                $("#interestTable").dataTable({
+                    "paging": false,
+                    "ordering": true,
+                    "info": false,
+                    "bFilter": false
+                });
+            }
+        });
+    });
+</script>

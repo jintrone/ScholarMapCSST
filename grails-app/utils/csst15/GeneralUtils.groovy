@@ -45,6 +45,28 @@ public final class GeneralUtils {
         "/ScholarMapClean/" + prefix + "/" + refUrl
     }
 
+    public static String constructReferenceUrl(Entity e) {
+//        def refUrl = Normalizer.normalize(source?.toLowerCase(), Normalizer.Form.NFD)
+//                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+//                .replaceAll("[^\\p{Alnum}]+", "-")
+//                .replace("--", "-").replace("--", "-")
+//                .replaceAll('[^a-z0-9]+$', "")
+//                .replaceAll("^[^a-z0-9]+", "")
+//
+        "/ScholarMapClean/entity/view/${e.id}"
+    }
+
+    public static String constructReferenceUrl(Reference e) {
+//        def refUrl = Normalizer.normalize(source?.toLowerCase(), Normalizer.Form.NFD)
+//                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+//                .replaceAll("[^\\p{Alnum}]+", "-")
+//                .replace("--", "-").replace("--", "-")
+//                .replaceAll('[^a-z0-9]+$', "")
+//                .replaceAll("^[^a-z0-9]+", "")
+//
+        "/ScholarMapClean/reference/view/${e.id}"
+    }
+
     public static constructOnlyParam(EntityType entityType) {
         def result = null
         switch (entityType) {

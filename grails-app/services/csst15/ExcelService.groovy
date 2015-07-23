@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest
 @Transactional
 class ExcelService {
     def userService
+    def
+    static fieldOrder = ["username", "email", "firstName", "lastName", "degreeInstitution", "degreeYear", "position", "currentInstitution", "schoolOrDepartment"]
+
 
     def readExcelData(HttpServletRequest request, String field) {
         def fieldsMap = [:]
@@ -21,31 +24,48 @@ class ExcelService {
         Sheet sheet = workbook.getSheetAt(0)
         Iterator<Row> rowIterator = sheet.iterator()
 
+//        loadUserCommand.username = fields?.get(0)
+//        loadUserCommand.email = fields?.get(1)
+//        loadUserCommand.firstName = fields?.get(2)
+//        loadUserCommand.lastName = fields?.get(3)
+//        loadUserCommand.degreeInstitution = fields?.get(4)
+//        loadUserCommand.degreeYear = fields?.get(5)
+//        loadUserCommand.position = fields?.get(6)
+//        loadUserCommand.currentInstitution = fields?.get(7)
+//        loadUserCommand.schoolOrDepartment = fields?.get(8)
+
+        boolean processedHeaders = false
         while (rowIterator.hasNext()) {
+
             Row row = rowIterator.next()
             Iterator<Cell> cellIterator = row.iterator()
-            def fieldsList = []
+            def headers = []
+            def fieldMap = [:]
             def invalid = false
-            while (cellIterator.hasNext()) {
-                Cell cell = cellIterator.next()
-                switch (cell.getCellType()) {
-                    case Cell.CELL_TYPE_STRING:
-                        if (cell.getStringCellValue().trim() == "username" || cell.getStringCellValue().trim() == '') {
-                            invalid = true
-                        } else {
-                            fieldsList.add(cell.getStringCellValue())
-                        }
-                        break
-                    case Cell.CELL_TYPE_NUMERIC:
-                        fieldsList.add(cell.getNumericCellValue())
-                        break
+            cellIterator.eachWithIndex {Cell cell, int i ->
+
+                if (!processedHeaders) {
+                    headers << cell.getStringCellValue().trim()
+
+                } else {
+                    switch (cell.getCellType()) {
+                        case Cell.CELL_TYPE_STRING:
+
+                            fieldMap[headers[i]] = cell.getStringCellValue()
+                            break
+
+                        case Cell.CELL_TYPE_NUMERIC:
+                            fieldMap[headers[i]] = cell.getNumericCellValue()
+                            break
+                    }
                 }
 
-                if (invalid)
-                    break
+
+
             }
+            processedHeaders = true
             if (!invalid)
-                fieldsMap.put(row.rowNum, fieldsList)
+                fieldsMap.put(row.rowNum, fieldMap)
         }
 
         return userService.createUser(fieldsMap)

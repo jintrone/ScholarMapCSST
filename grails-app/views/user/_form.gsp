@@ -130,7 +130,7 @@
         </div>
 
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="degreeInstitution" placeholder="Not set"
+            <input type="text" class="form-control" name="currentInstitution" placeholder="Not set"
                    value="${user.currentInstitution}"/>
         </div>
 
@@ -144,26 +144,7 @@
         </div>
     </div>
 
-   <!-- <div class="form-group">
-        <div class="col-sm-3">
-            <label for="">Specialization</label>
-        </div>
 
-        <div class="col-sm-6">
-            <g:select from="${Specialization.list().title}" noSelection="['': 'Not set']"
-                      class="form-control" name="specialization" placeholder="Not set"
-                      value="${user.specialization?.title}"/>
-        </div>
-
-        <div class="col-sm-3">
-            <g:if test="${!lockConf.isSpecializationLocked}">
-                <label class="switch switch-success">
-                    <input type="checkbox" id="isSpecializationVisible"
-                           class="permission" ${visConf?.isSpecializationVisible ? 'checked="checked"' : ''}/><i></i>
-                </label>
-            </g:if>
-        </div>
-    </div> -->
 
     <div class="form-group">
         <div class="col-sm-3">

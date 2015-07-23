@@ -63,7 +63,7 @@ class AdminController {
     @Transactional
     def createUser(EmailOnlyCommand emailCommand) {
         if (emailCommand.hasErrors())
-            render(view: 'create', model: [userInstace: emailCommand])
+            render(view: 'create', model: [userInstance: emailCommand])
         else {
             def user = userService.createUser(params.email)
 

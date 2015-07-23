@@ -27,10 +27,12 @@
                     dateType:'json',
                     success: function(data) {
                         $("#ref_tab").css('display', 'block');
-                        $("#ref_tab").find("tr:gt(0)").remove();
+                        $("#ref_tab").find("tr").remove();
                         for(var i = 0; i < data.length; i ++) {
-                            $("#ref_tab").find("tr:first").clone().appendTo("#ref_tab tbody").find('td').text(data[i].citation);
-                            $("#ref_tab").find("tr input").eq(i+1).val(data[i].id);
+
+                            $("#ref_tab tbody").append("<tr class='tempRow'><td style='cursor: pointer'><input type='hidden' name='tempId' value='"+data[i].id+"' />"+data[i].citation+"</td></tr>");
+                           // $("#ref_tab").find("tr:first").clone().appendTo("#ref_tab tbody").find('td').text(data[i].citation);
+                           // $("#ref_tab").find("tr input").eq(i+1).val(data[i].id);
                         }
                         setReferenceDetails();
                     }
@@ -44,7 +46,7 @@
     });
 
     function setReferenceDetails() {
-       $("#ref_tab").find("tr:gt(0)").each(function() {
+       $("#ref_tab").find("tr").each(function() {
             $(this).click(function() {
                 $.ajax({
                     data: {

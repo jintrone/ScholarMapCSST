@@ -62,19 +62,19 @@ class UserService {
     def createUser(Map fieldsMap) {
         for (int i = 1; i <= fieldsMap.size(); i++) {
             LoadUserCommand loadUserCommand = new LoadUserCommand()
-            List fields = fieldsMap.get(i)
+            Map fields = fieldsMap.get(i)
 
             if (fields?.size() > 0) {
                 def user = new User()
-                loadUserCommand.username = fields?.get(0)
-                loadUserCommand.email = fields?.get(1)
-                loadUserCommand.firstName = fields?.get(2)
-                loadUserCommand.lastName = fields?.get(3)
-                loadUserCommand.institution = fields?.get(4)
-                loadUserCommand.degreeYear = fields?.get(5)
-                loadUserCommand.position = fields?.get(6)
-                loadUserCommand.department = fields?.get(7)
-                loadUserCommand.specialization = fields?.get(8)
+                loadUserCommand.username = fields?.get("username")
+                loadUserCommand.email = fields?.get("email")
+                loadUserCommand.firstName = fields?.get("firstName")
+                loadUserCommand.lastName = fields?.get("lastName")
+                loadUserCommand.degreeInstitution = fields?.get("degreeInstitution")
+                loadUserCommand.degreeYear = fields?.get("degreeYear")
+                loadUserCommand.position = fields?.get("postition")
+                loadUserCommand.currentInstitution = fields?.get("currentInstitution")
+                loadUserCommand.schoolOrDepartment = fields?.get("schoolOrDepartment")
 
                 if (loadUserCommand.validate()) {
                     user.username = loadUserCommand.username
@@ -85,10 +85,10 @@ class UserService {
                     def password = makeRandomPassword()
                     user.password = password
                     user.enabled = true
-                    user.institution = loadUserCommand.institution
-                    user.department = loadUserCommand.department ? Department.findByTitle(loadUserCommand.department) : user.department
+                    user.currentInstitution = loadUserCommand.currentInstitution
+                    user.schoolOrDepartment = loadUserCommand.schoolOrDepartment
                     user.position = loadUserCommand.position ? Position.findByName(loadUserCommand.position) : user.position
-                    user.specialization = loadUserCommand.specialization ? Specialization.findByTitle(loadUserCommand.specialization) : user.specialization
+                    user.degreeInstitution = loadUserCommand.degreeInstitution
                     user.lockConf = new FieldLockConf()
                     user.visibilityConf = new FieldVisibilityConf()
 
@@ -113,10 +113,10 @@ class UserService {
         user.firstName = command.firstName ? command.firstName : user.firstName
         user.lastName = command.lastName ? command.lastName : user.lastName
         user.degreeYear = command.degreeYear ? command.degreeYear : user.degreeYear
-        user.institution = command.institution ? command.institution : user.institution
-        user.department = command.department ? Department.findByTitle(command.department) : user.department
+        user.currentInstitution = command.currentInstitution ?:user.currentInstitution
+        user.schoolOrDepartment = command.schoolOrDepartment?:user.schoolOrDepartment
         user.position = command.position ? Position.findByName(command.position) : user.position
-        user.specialization = command.specialization ? Specialization.findByTitle(command.specialization) : user.specialization
+        user.degreeInstitution = command.degreeInstitution?:user.degreeInstitution
 
         if (user.save(flush: true)) {
             log.info("Updated user with id ${user.id}")

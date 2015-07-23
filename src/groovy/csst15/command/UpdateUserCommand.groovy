@@ -50,6 +50,14 @@ class UpdateUserCommand {
             }
         }
 
+       degreeInstitution nullable: true, validator: { val, obj ->
+            FieldMandatoryConf.withNewSession { session ->
+                if (FieldMandatoryConf.findByFieldName('degreeInstitution')?.isMandatory && !val)
+                    return ['degreeInstitution.required']
+            }
+        }
+
+
 //        degreeInstitution nullable: true
 //        currentInstitution nullable: true
 //        schoolOrDepartment nullable: true

@@ -38,7 +38,7 @@ class GraphController extends RestfulController {
                             [
                                     name        : entity.name,
                                     type: entity.type.name,
-                                    relative_url: csst15.GeneralUtils.constructReferenceUrl(entity.type, entity.name),
+                                    relative_url: csst15.GeneralUtils.constructReferenceUrl(entity),
                                     people      : (ReferenceVote.findAllByEntity(entity).user.unique().id),
                                     references  :
                                             ReferenceVote.findAllByEntity(entity).reference.unique().collect {
@@ -61,7 +61,11 @@ class GraphController extends RestfulController {
                             },
                     references:
                             references.collect { Reference reference ->
-                                [id: reference.id, name: reference.citation, relative_url: csst15.GeneralUtils.constructReferenceUrl("reference", reference.citation.substring(0, 10))]
+                                String name = ReferenceAuthor.findAllByReference(reference).min { ReferenceAuthor a->
+                                    a.authorOrder
+                                }.author.lastName
+                                def citationStr = "${name} ${reference.year}"
+                                [id: reference.id, citationShort: citationStr, name: reference.citation, relative_url: csst15.GeneralUtils.constructReferenceUrl(reference)]
                             }
             )
         }
@@ -96,7 +100,7 @@ class GraphController extends RestfulController {
                                 authors: authorStr,
                                 citationShort : citationStr,
                                 //institution  : reference.creator?.currentInstitution?: "",
-                                relative_url: csst15.GeneralUtils.constructReferenceUrl("reference", ReferenceAuthor.findByReference(reference).author.lastName + reference.year + reference.hash),
+                                relative_url: csst15.GeneralUtils.constructReferenceUrl(reference),
                                 methods     : (methods.id),
                                 fields      : (fields.id),
                                 venues      : (venues.id),
@@ -110,7 +114,7 @@ class GraphController extends RestfulController {
                     allMethods.collect { method ->
                         "${method.id}" {
                             name "${method.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(csst15.constants.EntityType.METHOD.name.toLowerCase(), method.name)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(method)}"
                         }
                     }
                 }
@@ -119,7 +123,7 @@ class GraphController extends RestfulController {
                     allTheories.collect { theory ->
                         "${theory.id}" {
                             name "${theory.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(csst15.constants.EntityType.THEORY.name.toLowerCase(), theory.name)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(theory)}"
                         }
                     }
                 }
@@ -128,7 +132,7 @@ class GraphController extends RestfulController {
                     allFields.collect { field ->
                         "${field.id}" {
                             name "${field.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(csst15.constants.EntityType.FIELD.name.toLowerCase(), field.name)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(field)}"
                         }
                     }
                 }
@@ -137,7 +141,7 @@ class GraphController extends RestfulController {
                     allVenues.collect { venue ->
                         "${venue.id}" {
                             name "${venue.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(csst15.constants.EntityType.VENUE.name.toLowerCase(), venue.name)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(venue)}"
                         }
                     }
                 }
@@ -190,7 +194,7 @@ class GraphController extends RestfulController {
                     allMethods.collect { method ->
                         "${method.id}" {
                             name "${method.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(csst15.constants.EntityType.METHOD.name.toLowerCase(), method.name)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(method)}"
                         }
                     }
                 }
@@ -199,7 +203,7 @@ class GraphController extends RestfulController {
                     allTheories.collect { theory ->
                         "${theory.id}" {
                             name "${theory.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(csst15.constants.EntityType.THEORY.name.toLowerCase(), theory.name)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(theory)}"
                         }
                     }
                 }
@@ -208,7 +212,7 @@ class GraphController extends RestfulController {
                     allFields.collect { field ->
                         "${field.id}" {
                             name "${field.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(csst15.constants.EntityType.FIELD.name.toLowerCase(), field.name)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(field)}"
                         }
                     }
                 }
@@ -217,7 +221,7 @@ class GraphController extends RestfulController {
                     allVenues.collect { venue ->
                         "${venue.id}" {
                             name "${venue.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(csst15.constants.EntityType.VENUE.name.toLowerCase(), venue.name)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(venue)}"
                         }
                     }
                 }

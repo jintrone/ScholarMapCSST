@@ -10,6 +10,7 @@
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet"/>
     <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}">
     <asset:stylesheet src="application.css"/>
+    <asset:javascript src="application.js"/>
 
 
 </head>
@@ -98,7 +99,7 @@
 <div class="content" style="margin-top: 100px">
     <g:layoutBody/>
     <g:render template="/utils/hiddenLinks"/>
-    <asset:javascript src="application.js"/>
+
 
 
 </div>
