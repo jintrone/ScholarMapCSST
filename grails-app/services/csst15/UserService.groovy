@@ -62,13 +62,15 @@ class UserService {
     }
 
     def createUser(Map fieldsMap) {
-        for (int i = 1; i <= fieldsMap.size(); i++) {
+        println("Create users")
+        println(fieldsMap.values())
+        fieldsMap.values().each {Map fields->
             LoadUserCommand loadUserCommand = new LoadUserCommand()
-            Map fields = fieldsMap.get(i)
+
 
             if (fields?.size() > 0) {
                 def user = new User()
-
+                println "Processing user"
                 loadUserCommand.email = fields?.get("email")
                 loadUserCommand.firstName = fields?.get("firstName")
                 loadUserCommand.lastName = fields?.get("lastName")
@@ -78,8 +80,9 @@ class UserService {
                 loadUserCommand.currentInstitution = fields?.get("currentInstitution")
                 loadUserCommand.schoolOrDepartment = fields?.get("schoolOrDepartment")
 
+                println "Processing command ${loadUserCommand}"
                 if (loadUserCommand.validate()) {
-
+                     println "Validates"
                     user.email = loadUserCommand.email
                     user.firstName = loadUserCommand.firstName
                     user.lastName = loadUserCommand.lastName
@@ -98,13 +101,17 @@ class UserService {
                     if (user.save()) {
                         log.info("Created user with username: ${user.username}, id: ${user.id}")
                         addDefaultRole(user)
-                        notificationService.sendInvitationToUser(user, password)
-
+                        //notificationService.sendInvitationToUser(user, password)
+                        println "Saves ${user.firstName}"
                     } else {
+                        println "Fails ${user.firstName}"
                         log.error("User creation attempt failed")
                         log.error(user?.errors?.dump())
                     }
+                } else {
+                    println "Errors validating ${loadUserCommand.errors}"
                 }
+
             }
 
         }

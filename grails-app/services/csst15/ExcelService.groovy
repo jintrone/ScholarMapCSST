@@ -35,11 +35,12 @@ class ExcelService {
 //        loadUserCommand.schoolOrDepartment = fields?.get(8)
 
         boolean processedHeaders = false
+        List headers = []
         while (rowIterator.hasNext()) {
 
             Row row = rowIterator.next()
             Iterator<Cell> cellIterator = row.iterator()
-            def headers = []
+
             def fieldMap = [:]
             def invalid = false
             cellIterator.eachWithIndex {Cell cell, int i ->
@@ -63,9 +64,13 @@ class ExcelService {
 
 
             }
-            processedHeaders = true
-            if (!invalid)
+
+
+            if (processedHeaders) {
                 fieldsMap.put(row.rowNum, fieldMap)
+            } else {
+                processedHeaders = true
+            }
         }
 
         return userService.createUser(fieldsMap)

@@ -11,7 +11,7 @@ import org.joda.time.LocalDate
 
 @Validateable
 class LoadUserCommand {
-    String username
+
     String email
     String firstName
     String lastName
