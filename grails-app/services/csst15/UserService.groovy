@@ -101,7 +101,7 @@ class UserService {
                     if (user.save()) {
                         log.info("Created user with username: ${user.username}, id: ${user.id}")
                         addDefaultRole(user)
-                        //notificationService.sendInvitationToUser(user, password)
+                        notificationService.sendInvitationToUser(user, password)
                         println "Saves ${user.firstName}"
                     } else {
                         println "Fails ${user.firstName}"
