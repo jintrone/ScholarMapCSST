@@ -24,13 +24,6 @@
                               id='loginForm' class='form-horizontal text-center' autocomplete='off'>
                             <div class="form-group">
                                 <span class="glyphicon glyphicon-user"></span>
-                                <input type="text" name="username" value="${userInstance?.username}"
-                                       class="form-control input-lg input-round text-center"
-                                       placeholder="Username">
-                            </div>
-
-                            <div class="form-group">
-                                <span class="glyphicon glyphicon-user"></span>
                                 <input type="text" name="firstName" value="${userInstance?.firstName}"
                                        class="form-control input-lg input-round text-center"
                                        placeholder="First Name">

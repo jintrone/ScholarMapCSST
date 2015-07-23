@@ -7,6 +7,7 @@ import csst15.security.User
 import csst15.security.UserRole
 import grails.rest.RestfulController
 import groovy.json.JsonBuilder
+import org.codehaus.groovy.grails.web.mapping.LinkGenerator
 
 import static csst15.GeneralUtils.constructOnlyParam
 import static csst15.GeneralUtils.constructReferenceUrl
@@ -14,6 +15,8 @@ import static csst15.constants.EntityType.*
 
 class GraphController extends RestfulController {
     static responseFormats = ['json', 'xml']
+
+    LinkGenerator grailsLinkGenerator
 
     GraphController() {
         super(User)
@@ -38,7 +41,7 @@ class GraphController extends RestfulController {
                             [
                                     name        : entity.name,
                                     type: entity.type.name,
-                                    relative_url: csst15.GeneralUtils.constructReferenceUrl(entity),
+                                    relative_url: csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath,entity),
                                     people      : (ReferenceVote.findAllByEntity(entity).user.unique().id),
                                     references  :
                                             ReferenceVote.findAllByEntity(entity).reference.unique().collect {
@@ -56,7 +59,7 @@ class GraphController extends RestfulController {
                                 [
                                         id          : u.id,
                                         name        : u.firstName + " " + u.lastName,
-                                        relative_url: csst15.GeneralUtils.constructReferenceUrl("user", u.username)
+                                        relative_url: csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath,u)
                                 ]
                             },
                     references:
@@ -65,7 +68,7 @@ class GraphController extends RestfulController {
                                     a.authorOrder
                                 }.author.lastName
                                 def citationStr = "${name} ${reference.year}"
-                                [id: reference.id, citationShort: citationStr, name: reference.citation, relative_url: csst15.GeneralUtils.constructReferenceUrl(reference)]
+                                [id: reference.id, citationShort: citationStr, name: reference.citation, relative_url: csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath,reference)]
                             }
             )
         }
@@ -100,7 +103,7 @@ class GraphController extends RestfulController {
                                 authors: authorStr,
                                 citationShort : citationStr,
                                 //institution  : reference.creator?.currentInstitution?: "",
-                                relative_url: csst15.GeneralUtils.constructReferenceUrl(reference),
+                                relative_url: csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath,reference),
                                 methods     : (methods.id),
                                 fields      : (fields.id),
                                 venues      : (venues.id),
@@ -114,7 +117,7 @@ class GraphController extends RestfulController {
                     allMethods.collect { method ->
                         "${method.id}" {
                             name "${method.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(method)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath,method)}"
                         }
                     }
                 }
@@ -123,7 +126,7 @@ class GraphController extends RestfulController {
                     allTheories.collect { theory ->
                         "${theory.id}" {
                             name "${theory.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(theory)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath,theory)}"
                         }
                     }
                 }
@@ -132,7 +135,7 @@ class GraphController extends RestfulController {
                     allFields.collect { field ->
                         "${field.id}" {
                             name "${field.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(field)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath,field)}"
                         }
                     }
                 }
@@ -141,7 +144,7 @@ class GraphController extends RestfulController {
                     allVenues.collect { venue ->
                         "${venue.id}" {
                             name "${venue.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(venue)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath,venue)}"
                         }
                     }
                 }
@@ -180,7 +183,7 @@ class GraphController extends RestfulController {
                                 name        : u.firstName + " " + u.lastName,
                                 institution  : u.currentInstitution?: "",
                                 position    : u.position?.name?:"",
-                                relative_url: csst15.GeneralUtils.constructReferenceUrl("user", u.username),
+                                relative_url: csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath, u),
                                 methods     : (userMethods.id),
                                 fields      : (userFields.id),
                                 venues      : (userVenues.id),
@@ -194,7 +197,7 @@ class GraphController extends RestfulController {
                     allMethods.collect { method ->
                         "${method.id}" {
                             name "${method.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(method)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath,method)}"
                         }
                     }
                 }
@@ -203,7 +206,7 @@ class GraphController extends RestfulController {
                     allTheories.collect { theory ->
                         "${theory.id}" {
                             name "${theory.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(theory)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath,theory)}"
                         }
                     }
                 }
@@ -212,7 +215,7 @@ class GraphController extends RestfulController {
                     allFields.collect { field ->
                         "${field.id}" {
                             name "${field.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(field)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath,field)}"
                         }
                     }
                 }
@@ -221,7 +224,7 @@ class GraphController extends RestfulController {
                     allVenues.collect { venue ->
                         "${venue.id}" {
                             name "${venue.name}"
-                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(venue)}"
+                            relative_url "${csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath,venue)}"
                         }
                     }
                 }

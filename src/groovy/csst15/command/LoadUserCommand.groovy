@@ -23,7 +23,7 @@ class LoadUserCommand {
     String currentInstitution
 
     static constraints = {
-        username blank: false, unique: true
+
         email nullable: false, blank: false, unique: true, email: true
 
         firstName nullable: true, validator: { val, obj ->

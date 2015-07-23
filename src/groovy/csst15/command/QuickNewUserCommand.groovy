@@ -10,7 +10,7 @@ import grails.validation.Validateable
 
 @Validateable
 class QuickNewUserCommand {
-    String username
+
     String email
     String password
     String confirmPassword
@@ -18,7 +18,7 @@ class QuickNewUserCommand {
     String lastName
 
     static constraints = {
-        username blank: false, unique: true
+
         email email: true, blank: false, unique: true
         password blank: false, size: 6..20
         confirmPassword validator: { val, obj ->

@@ -34,7 +34,8 @@ class UserController {
     def profile() {
 
         def currentUser = springSecurityService.currentUser as User
-        def user = User.findByUsername(params.username)
+        def user = params.username?User.findByUsername(params.username):currentUser?User.findByUsername(currentUser.username):null
+        println "${user.username}"
         if (user) {
             def entities = UserEntity.findAllByUser(user)?.entity
             if (currentUser) {

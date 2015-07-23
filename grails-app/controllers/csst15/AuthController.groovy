@@ -37,6 +37,7 @@ class AuthController {
         else {
             def user = userService.createQuickUser(userCommand)
 
+
             if (user?.id) {
                 if (Holders.config.grails.email.skip) {
                     log.debug("Skip email confirmation step. Active user")
@@ -44,7 +45,7 @@ class AuthController {
 
                     user.save()
 
-                    UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+                    UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
                     SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
                             userDetails, userDetails.getPassword(), userDetails.getAuthorities()));
                     userCache.removeUserFromCache(user.getUsername());

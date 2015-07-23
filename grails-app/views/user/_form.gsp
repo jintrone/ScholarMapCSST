@@ -181,7 +181,7 @@
         <div class="col-sm-3">
             <g:if test="${!lockConf.isSchoolOrDepartmentLocked}">
                 <label class="switch switch-success">
-                    <input type="checkbox" id="isDepartmentVisible"
+                    <input type="checkbox" id="isSchoolOrDepartmentVisible"
                            class="permission" ${visConf?.isSchoolOrDepartmentVisible ? 'checked="checked"' : ''}/><i></i>
                 </label>
             </g:if>

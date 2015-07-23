@@ -24,6 +24,8 @@ class UserService {
     def createQuickUser(QuickNewUserCommand userCommand) {
         def user = new User()
         user.properties = userCommand.properties
+        user.username = GeneralUtils.createUsername(user.firstName,user.lastName,user.email)
+
         addConfigToUser(user)
 
         if (user.save(flush: true)) {
@@ -39,7 +41,7 @@ class UserService {
     }
 
     def createUser(String email) {
-        createUser(email, constructUsername(email), makeRandomPassword())
+        createUser(email, GeneralUtils.createUsername(null,null,email), makeRandomPassword())
     }
 
     def createUser(String email, String username, String password) {
@@ -66,7 +68,7 @@ class UserService {
 
             if (fields?.size() > 0) {
                 def user = new User()
-                loadUserCommand.username = fields?.get("username")
+
                 loadUserCommand.email = fields?.get("email")
                 loadUserCommand.firstName = fields?.get("firstName")
                 loadUserCommand.lastName = fields?.get("lastName")
@@ -77,10 +79,11 @@ class UserService {
                 loadUserCommand.schoolOrDepartment = fields?.get("schoolOrDepartment")
 
                 if (loadUserCommand.validate()) {
-                    user.username = loadUserCommand.username
+
                     user.email = loadUserCommand.email
                     user.firstName = loadUserCommand.firstName
                     user.lastName = loadUserCommand.lastName
+                    user.username = GeneralUtils.createUsername(user.firstName,user.lastName,user.email)
                     user.degreeYear = loadUserCommand.degreeYear
                     def password = makeRandomPassword()
                     user.password = password

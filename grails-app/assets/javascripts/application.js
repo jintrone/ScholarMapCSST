@@ -354,15 +354,16 @@ function setUsersDataTable() {
             "type": "POST"
         },
         "columns": [
+
             {
-                "data": "username",
+                "data": "fullName",
                 "mRender": function (data, type, full) {
-                    return "<a href='/ScholarMapClean/user/" + data + "'>" + data + "</a>";
+                    return "<a href='/ScholarMapClean/user/" + full.username + "'>" + data + "</a>";
                 }
             },
-            {"data": "fullName"},
             {"data": "currentInstitution"},
-            {"data": "position"}
+            {"data": "position"},
+            {"data": "schoolOrDepartment"}
         ]
     });
 }

@@ -19,7 +19,7 @@
 <br><br>
 
 <div class="welcome-message">
-    Hi Dear Customer,<br><br>
+    Hi!<br><br>
     Welcome to ScholarMap.
     <br><br><br>
     <span class="important">
@@ -32,4 +32,4 @@
 </div>
 <br><br>
 Regards,<br>
-ScholarMap team.
+The Infrastructure Team

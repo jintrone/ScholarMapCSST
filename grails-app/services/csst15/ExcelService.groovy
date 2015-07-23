@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest
 class ExcelService {
     def userService
     def
-    static fieldOrder = ["username", "email", "firstName", "lastName", "degreeInstitution", "degreeYear", "position", "currentInstitution", "schoolOrDepartment"]
+    static fieldOrder = ["email", "firstName", "lastName", "degreeInstitution", "degreeYear", "position", "currentInstitution", "schoolOrDepartment"]
 
 
     def readExcelData(HttpServletRequest request, String field) {

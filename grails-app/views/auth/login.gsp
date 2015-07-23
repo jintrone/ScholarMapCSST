@@ -13,8 +13,8 @@
     <table>
       <tbody>
         <tr>
-          <td>Username:</td>
-          <td><input type="text" name="username" value="${username}" /></td>
+          <td>Email:</td>
+          <td><input type="email" name="email" value="${email}" /></td>
         </tr>
         <tr>
           <td>Password:</td>

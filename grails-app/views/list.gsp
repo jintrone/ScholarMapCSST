@@ -8,10 +8,11 @@
             <table class="table display" cellspacing="0" id="listTable">
                 <thead>
                 <tr>
-                    <th>Username</th>
+
                     <th>Full Name</th>
                     <th>Current Institution</th>
                     <th>Position</th>
+                    <th>School / Department</th>
                 </tr>
                 </thead>
                 <tbody>

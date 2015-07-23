@@ -115,6 +115,11 @@ class UrlMappings {
             action = "update"
         }
 
+        "/profile" {
+            controller = "user"
+            action= "profile"
+        }
+
         "/api/v1/people/graphs/force-directed" {
             controller = "graph"
             action = "peopleGraph"

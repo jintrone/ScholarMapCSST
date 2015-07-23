@@ -22,7 +22,7 @@ class HomeController {
     }
 
     def list() {
-        def columns = ['0': 'username', '1': 'lastName', '2': 'currentInstitution', '3': 'name']
+        def columns = ['0': 'lastName', '1': 'currentInstitution', '2': 'name', '3':'schoolOrDepartment']
         if (request.method == "POST") {
             def c = User.createCriteria()
             def allUsers = c.list(max: Integer.parseInt(params.length), offset: params.start) {
@@ -30,11 +30,12 @@ class HomeController {
                 createAlias('position', 'p')
                 gt("id", 1L)
                 or {
-                    ilike("username", "${params.'search[value]'}%")
+
                     ilike("firstName", "${params.'search[value]'}%")
                     ilike("lastName", "${params.'search[value]'}%")
                     ilike("currentInstitution", "${params.'search[value]'}%")
                     ilike("p.name", "${params.'search[value]'}%")
+                    ilike("schoolOrDepartment", "${params.'search[value]'}%")
                 }
 
                  if (params.'order[0][column]' == '3') {
@@ -48,11 +49,12 @@ class HomeController {
                 createAlias('position', 'p')
                 gt("id", 1L)
                 or {
-                    ilike("username", "${params.'search[value]'}%")
+
                     ilike("firstName", "${params.'search[value]'}%")
                     ilike("lastName", "${params.'search[value]'}%")
                     ilike("currentInstitution", "${params.'search[value]'}%")
                     ilike("p.name", "${params.'search[value]'}%")
+                    ilike("schoolOrDepartment", "${params.'search[value]'}%")
                 }
             }
 
@@ -63,10 +65,11 @@ class HomeController {
                     data:
                             allUsers.collect { user ->
                                 [
-                                        username  : user.username,
+                                        username :"${user.username}",
                                         fullName  : "${user.firstName} ${user.lastName}",
                                         currentInstitution: user.currentInstitution,
-                                        position  : user.position?.name
+                                        position  : user.position?.name,
+                                        schoolOrDepartment : user.schoolOrDepartment
                                 ]
                             }
             )

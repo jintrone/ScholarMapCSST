@@ -11,7 +11,7 @@ import org.joda.time.LocalDate
 
 @Validateable
 class UpdateUserCommand {
-    String username
+
     String email
     String firstName
     String lastName
@@ -27,7 +27,6 @@ class UpdateUserCommand {
     byte[] photo
 
     static constraints = {
-        username blank: false, unique: true
         email nullable: false, blank: false, unique: true, email: true
 
         firstName nullable: true, validator: { val, obj ->

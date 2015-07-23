@@ -16,9 +16,9 @@
                         <fieldset>
                             <div class="form-group">
                                 <span class="glyphicon glyphicon-envelope"></span>
-                                <input type="text" name='j_username' id='username'
+                                <input type="email" name='j_username' id='email'
                                        class="form-control input-lg input-round text-center"
-                                       placeholder="Username">
+                                       placeholder="Email">
                             </div>
 
                             <div class="form-group">

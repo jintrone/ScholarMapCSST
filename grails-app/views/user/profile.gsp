@@ -60,7 +60,7 @@
                                             <g:if test="${hasCurrentUser || user.visibilityConf.isSchoolOrDepartmentVisible}">
                                                 <li>
                                                     <span class="icon glyphicon"></span>
-                                                    <label>Department</label>
+                                                    <label>School / Department</label>
                                                     ${user.schoolOrDepartment}
                                                 </li>
                                             </g:if>

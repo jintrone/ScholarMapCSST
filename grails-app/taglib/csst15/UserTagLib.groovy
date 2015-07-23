@@ -12,8 +12,8 @@ class UserTagLib {
     def userFullName = { attrs ->
         def currentUser = springSecurityService.currentUser as User
 
-        if (currentUser.firstName && currentUser.lastName) {
-            out << currentUser.firstName + " " + currentUser.lastName
+        if (currentUser.firstName) {
+            out << currentUser.firstName
         } else {
             out << currentUser.username
         }

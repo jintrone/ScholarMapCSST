@@ -1,7 +1,10 @@
 package csst15
 
 import csst15.constants.EntityType
+import csst15.security.User
 import org.apache.commons.lang3.text.WordUtils
+import org.codehaus.groovy.grails.web.mapping.LinkGenerator
+import org.springframework.beans.factory.annotation.Autowired
 
 import java.security.MessageDigest
 import java.text.Normalizer
@@ -19,6 +22,10 @@ public final class GeneralUtils {
     private static final String VISIBLE_SUFFIX = 'Visible'
     private static final String PREFIX = 'is'
 
+
+
+
+
     private GeneralUtils() {
     }
 
@@ -34,18 +41,37 @@ public final class GeneralUtils {
         return PREFIX.concat(WordUtils.capitalize(fieldName)).concat(VISIBLE_SUFFIX)
     }
 
-    public static String constructReferenceUrl(def prefix, String source) {
-        def refUrl = Normalizer.normalize(source?.toLowerCase(), Normalizer.Form.NFD)
+    public static String constructReferenceUrl(String prefix,User u) {
+        def refUrl = Normalizer.normalize(u.username?.toLowerCase(), Normalizer.Form.NFD)
                 .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
                 .replaceAll("[^\\p{Alnum}]+", "-")
                 .replace("--", "-").replace("--", "-")
                 .replaceAll('[^a-z0-9]+$', "")
                 .replaceAll("^[^a-z0-9]+", "")
 
-        "/ScholarMapClean/" + prefix + "/" + refUrl
+        "${prefix}/user/${refUrl}"
     }
 
-    public static String constructReferenceUrl(Entity e) {
+    public static String createUsername(String first, String last, String email) {
+        String result
+        if (first || last) {
+           result = "${first.toLowerCase()}_${last.toLowerCase()}"
+       } else  {
+           result = email.split("@")[0].toLowerCase()
+       }
+       List<User> users = User.findAllByUsername(result)
+
+
+        if (users) {
+            result+=(users.collect {u->(u.username.find(/\d+$/)?:"0").toInteger()}.max()+1) as String
+        }
+        result
+    }
+
+
+
+
+    public static String constructReferenceUrl(String prefix, Entity e) {
 //        def refUrl = Normalizer.normalize(source?.toLowerCase(), Normalizer.Form.NFD)
 //                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
 //                .replaceAll("[^\\p{Alnum}]+", "-")
@@ -53,10 +79,10 @@ public final class GeneralUtils {
 //                .replaceAll('[^a-z0-9]+$', "")
 //                .replaceAll("^[^a-z0-9]+", "")
 //
-        "/ScholarMapClean/entity/view/${e.id}"
+        "${prefix}/entity/view/${e.id}"
     }
 
-    public static String constructReferenceUrl(Reference e) {
+    public static String constructReferenceUrl(String prefix, Reference e) {
 //        def refUrl = Normalizer.normalize(source?.toLowerCase(), Normalizer.Form.NFD)
 //                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
 //                .replaceAll("[^\\p{Alnum}]+", "-")
@@ -64,7 +90,7 @@ public final class GeneralUtils {
 //                .replaceAll('[^a-z0-9]+$', "")
 //                .replaceAll("^[^a-z0-9]+", "")
 //
-        "/ScholarMapClean/reference/view/${e.id}"
+        "${prefix}/reference/view/${e.id}"
     }
 
     public static constructOnlyParam(EntityType entityType) {

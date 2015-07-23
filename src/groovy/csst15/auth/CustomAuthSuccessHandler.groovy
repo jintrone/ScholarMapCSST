@@ -25,8 +25,12 @@ class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHan
         } else if (hasUser) {
             GrailsUser user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-            println "${user.getUsername()}"
-            return "/user/${user.getUsername()}"
+//            //println "${user.getUsername()}"
+//            User u
+//            User.withSession {
+//                u = User.findByEmail(user.getUsername())
+//            }
+            return "/profile"
         } else {
             return super.determineTargetUrl(request, response)
         }
