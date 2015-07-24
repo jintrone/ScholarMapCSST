@@ -1,4 +1,4 @@
-<%@ page import="csst15.ReferenceVote; csst15.User; org.apache.shiro.SecurityUtils" %>
+<%@ page import="csst15.ReferenceVote; csst15.security.User" %>
 <g:set value="${ReferenceVote.findAllByUserAndEntity(User.findByEmail(SecurityUtils.subject.principal), entity)}" var="references"/>
 <table class="table">
     <thead>
