@@ -6,9 +6,6 @@
         padding-left: 15px;
     }
 
-    div.welcome-message .important {
-        font-weight: bolder;
-    }
     </style>
 </head>
 
@@ -19,17 +16,12 @@
 <br><br>
 
 <div class="welcome-message">
-    Hi!<br><br>
-    Welcome to ScholarMap.
+    Welcome to the CSST ScholarMap.
     <br><br><br>
-    <span class="important">
-        Please take a moment to click <a style="font-weight:bolder;color: #1145b1" href="${link}">${link}</a>
-        to activate your account on ScholarMap. Use credentials for signin:
-        <p><strong>username:</strong> ${username}</p>
-
-        <p><strong>password:</strong> ${password}</p>
-    </span>
+    Thanks for taking the time to login and fill out your profile.  You can access scholarmap at ....
+    Your username is your email address and your password is ${password}.
+    <br><br><br>
 </div>
 <br><br>
-Regards,<br>
-The Infrastructure Team
+Thanks,<br>
+The CSST Infrastructure Team

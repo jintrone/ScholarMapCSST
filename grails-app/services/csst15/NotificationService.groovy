@@ -4,6 +4,7 @@ import csst15.security.User
 import grails.transaction.Transactional
 import grails.util.Holders
 import groovy.util.logging.Slf4j
+import org.codehaus.groovy.grails.web.mapping.LinkGenerator
 
 @Slf4j
 @Transactional
@@ -12,6 +13,7 @@ class NotificationService {
     def groovyPageRenderer
     def mailSender
     def messageSource
+    LinkGenerator grailsLinkGenerator
 
     def sendInvitationToUser(User user, def password) {
         try {
@@ -22,7 +24,7 @@ class NotificationService {
                 from mailSender.username
                 subject messageSource.getMessage('user-invitation.notification.subject.text', null, Locale.US)
                 html groovyPageRenderer.render(template: '/notificationTemplates/userInvitationEmail',
-                        model: [username: user.username, password: password, link: Holders.config.grails.serverURL])
+                        model: [username: user.username, password: password, link: grailsLinkGenerator.serverBaseURL])
             }
             log.info("The activation email to '${user.email}' was sent.")
         } catch (Exception e) {

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest
 @Transactional
 class ExcelService {
     def userService
-    def
+
     static fieldOrder = ["email", "firstName", "lastName", "degreeInstitution", "degreeYear", "position", "currentInstitution", "schoolOrDepartment"]
 
 
