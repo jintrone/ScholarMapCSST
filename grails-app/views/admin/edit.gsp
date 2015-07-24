@@ -111,40 +111,22 @@
 
                         <div class="form-group">
                             <div class="col-sm-3">
-                                <label for="institution">Institution</label>
+                                <label for="currentInstitution">Current Institution</label>
                             </div>
 
                             <div class="col-sm-6">
-                                <g:textField type="text" class="form-control" name="institution" placeholder="Not set"
-                                       value="${user.institution}"/>
+                                <g:textField type="text" class="form-control" name="currentInstitution" placeholder="Not set"
+                                       value="${user.currentInstitution}"/>
                             </div>
 
                             <div class="col-sm-3">
                                 <label class="switch switch-success">
                                     <input type="checkbox" id="isInstitutionLocked"
-                                           class="lock" ${lockConf.isInstitutionLocked ? 'checked="checked"' : ''}/><i></i>
+                                           class="lock" ${lockConf.isCurrentInstitutionLocked ? 'checked="checked"' : ''}/><i></i>
                                 </label>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-sm-3">
-                                <label for="specialization">Specialization</label>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <g:select from="${Specialization.list().title}" noSelection="['': 'Not set']"
-                                          class="form-control" name="specialization" placeholder="Not set"
-                                          value="${user.specialization?.title}"/>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <label class="switch switch-success">
-                                    <input type="checkbox" id="isSpecializationLocked"
-                                           class="lock" ${lockConf.isSpecializationLocked ? 'checked="checked"' : ''}/><i></i>
-                                </label>
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <div class="col-sm-3">
@@ -168,20 +150,19 @@
 
                         <div class="form-group">
                             <div class="col-sm-3">
-                                <label for="department">Department</label>
+                                <label for="schoolOrDepartment">School / Department</label>
                             </div>
 
                             <div class="col-sm-6">
-                                <g:select from="${Department.list().title}" noSelection="['': 'Not set']"
-                                          class="form-control" name="department" placeholder="Not set"
-                                          value="${user.department?.title}"/>
+                                <g:textField type="text" class="form-control" name="schoolOrDepartment" placeholder="Not set"
+                                             value="${user.schoolOrDepartment}"/>
                             </div>
 
                             <div class="col-sm-3">
                                 %{--<p>Disable/Enable</p>--}%
                                 <label class="switch switch-success">
-                                    <input type="checkbox" id="isDepartmentLocked"
-                                           class="lock" ${lockConf.isDepartmentLocked ? 'checked="checked"' : ''}/><i></i>
+                                    <input type="checkbox" id="isSchoolOrDepartmentLocked"
+                                           class="lock" ${lockConf.isSchoolOrDepartmentLocked ? 'checked="checked"' : ''}/><i></i>
                                 </label>
                             </div>
                         </div>
