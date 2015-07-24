@@ -45,7 +45,7 @@ class ExcelService {
             def invalid = false
             cellIterator.each {Cell cell ->
                 int i = cell.columnIndex
-                println "$i"
+                //println "$i"
 
                 if (!processedHeaders) {
                     headers << cell.getStringCellValue().trim()
@@ -54,7 +54,7 @@ class ExcelService {
                     switch (cell.getCellType()) {
                         case Cell.CELL_TYPE_STRING:
 
-                            fieldMap[headers[i]] = cell.getStringCellValue()
+                            fieldMap[headers[i]] = cell.getStringCellValue().trim()
                             break
 
                         case Cell.CELL_TYPE_NUMERIC:

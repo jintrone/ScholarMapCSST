@@ -93,7 +93,7 @@ class UserService {
                     user.enabled = true
                     user.currentInstitution = loadUserCommand.currentInstitution
                     user.schoolOrDepartment = loadUserCommand.schoolOrDepartment
-                    user.position = loadUserCommand.position ? Position.findByName(loadUserCommand.position) : user.position
+                    user.position = loadUserCommand.position ? Position.findByNameLike(loadUserCommand.position) : user.position
                     user.degreeInstitution = loadUserCommand.degreeInstitution
                     user.lockConf = new FieldLockConf()
                     user.visibilityConf = new FieldVisibilityConf()

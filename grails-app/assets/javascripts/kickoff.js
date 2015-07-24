@@ -1,5 +1,5 @@
 $(document).ready(function () {
 
-    Viz.setup("#visualization", null, null);
+    Viz.setup("#visualization", null, null,null);
 
 });
