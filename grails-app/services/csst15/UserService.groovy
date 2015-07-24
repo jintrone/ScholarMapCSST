@@ -147,7 +147,14 @@ class UserService {
 
 
     private String makeRandomPassword() {
-        return "${System.currentTimeMillis()}"
+        Random rand = new Random()
+        String r = "abcdefghijklmnopqrstuvwxyz12345678990"
+        String password = ""
+        (1..8).each {
+          password+=r.charAt(rand.nextInt(r.length()))
+        }
+
+        return "${password}"
     }
 
     private String constructUsername(String email) {

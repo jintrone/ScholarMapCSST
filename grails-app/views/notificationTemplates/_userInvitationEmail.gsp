@@ -18,9 +18,14 @@
 <div class="welcome-message">
     Welcome to the CSST ScholarMap.
     <br><br><br>
-    Thanks for taking the time to login and fill out your profile.  You can access scholarmap at ....
-    Your username is your email address and your password is ${password}.
-    <br><br><br>
+    Thanks for taking the time to login and fill out your profile.  You can access scholarmap at:
+    <br><br>
+    <a href="${link}">${link}</a>
+    <br><br>
+    Your username is your email address and your password is:
+    <br><br>
+    ${password}
+    <br><br>
 </div>
 <br><br>
 Thanks,<br>

@@ -44,7 +44,9 @@ class ExcelService {
             def fieldMap = [:]
             def invalid = false
             cellIterator.each {Cell cell ->
-                int i = cell.columnIndex - 1
+                int i = cell.columnIndex
+                println "$i"
+
                 if (!processedHeaders) {
                     headers << cell.getStringCellValue().trim()
 
