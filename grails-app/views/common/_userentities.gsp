@@ -1,5 +1,5 @@
-<%@ page import="csst15.security.User; org.apache.shiro.SecurityUtils; csst15.User; csst15.Entity" %>
-<g:set var="user" value="${csst15.security.User.findByEmail(SecurityUtils.subject.principal)}"/>
+<%@ page import="csst15.security.User; csst15.Entity" %>
+<g:set var="user" value="${csst15.security.User.findByEmail("let's not worry about this?")}"/>
 <table class="table">
     <thead>
     <tr>
