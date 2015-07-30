@@ -42,14 +42,14 @@ public final class GeneralUtils {
     }
 
     public static String constructReferenceUrl(String prefix,User u) {
-        def refUrl = Normalizer.normalize(u.username?.toLowerCase(), Normalizer.Form.NFD)
-                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
-                .replaceAll("[^\\p{Alnum}]+", "-")
-                .replace("--", "-").replace("--", "-")
-                .replaceAll('[^a-z0-9]+$', "")
-                .replaceAll("^[^a-z0-9]+", "")
+//        def refUrl = Normalizer.normalize(u.username?.toLowerCase(), Normalizer.Form.NFD)
+//                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+//                .replaceAll("[^\\p{Alnum}]+", "-")
+//                .replace("--", "-").replace("--", "-")
+//                .replaceAll('[^a-z0-9]+$', "")
+//                .replaceAll("^[^a-z0-9]+", "")
 
-        "${prefix}/user/${refUrl}"
+        "${prefix}/user/${u.username}"
     }
 
     public static String createUsername(String first, String last, String email) {
