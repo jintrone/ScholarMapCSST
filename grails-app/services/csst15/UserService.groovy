@@ -51,7 +51,7 @@ class UserService {
         if (user.save(flush: true)) {
             log.info("Created user with id ${user.id}")
             addDefaultRole(user)
-            //notificationService.sendInvitationToUser(user, password)
+            notificationService.sendInvitationToUser(user, password)
             return user
         } else {
             log.error("User creation attempt failed")
@@ -91,7 +91,7 @@ class UserService {
                     //user.degreeYear = loadUserCommand.degreeYear
                     def password = makeRandomPassword()
                     user.password = password
-                    println "${user.username};${user.password}"
+                    //println "${user.username};${user.password}"
                     user.enabled = true
                     //user.currentInstitution = loadUserCommand.currentInstitution
                     //user.schoolOrDepartment = loadUserCommand.schoolOrDepartment
@@ -104,7 +104,7 @@ class UserService {
                     if (user.save()) {
                         log.info("Created user with username: ${user.username}, id: ${user.id}")
                         addDefaultRole(user)
-                        //notificationService.sendInvitationToUser(user, password)
+                        notificationService.sendInvitationToUser(user, password)
                         println "Saves ${user.firstName}"
                     } else {
                         println "Fails ${user.firstName}"
