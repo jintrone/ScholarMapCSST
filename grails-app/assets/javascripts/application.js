@@ -358,7 +358,7 @@ function setUsersDataTable() {
             {
                 "data": "fullName",
                 "mRender": function (data, type, full) {
-                    return "<a href='/ScholarMapClean/user/" + full.username + "'>" + data + "</a>";
+                    return "<a href='/ScholarMap/user/" + full.username + "'>" + data + "</a>";
                 }
             },
 
@@ -432,8 +432,8 @@ function setAvailableRefsDataTable() {
             {
                 "data": "id",
                 "mRender": function (data, type, full) {
-                    return "<a class='glyphicon glyphicon-eye-open' href='/ScholarMapClean/reference/view" + data + "'></a>" +
-                        "<a class='select-reference glyphicon glyphicon-arrow-up' href='/ScholarMapClean/interests/referenceVote" + data + "'></a>";
+                    return "<a class='glyphicon glyphicon-eye-open' href='/ScholarMap/reference/view" + data + "'></a>" +
+                        "<a class='select-reference glyphicon glyphicon-arrow-up' href='/ScholarMap/interests/referenceVote" + data + "'></a>";
                 }
             }
         ]
@@ -462,10 +462,10 @@ function setSelectedRefsDataTable() {
                 "data": "id",
                 "mRender": function (data, type, full) {
                     if (full.isOwner == true) {
-                        return "<a class='glyphicon glyphicon-eye-open' href='/ScholarMapClean/reference/view" + data + "'></a>" +
-                            "<a class='glyphicon glyphicon-remove' href='/ScholarMapClean/interests/removeVote" + data + "'></a>";
+                        return "<a class='glyphicon glyphicon-eye-open' href='/ScholarMap/reference/view" + data + "'></a>" +
+                            "<a class='glyphicon glyphicon-remove' href='/ScholarMap/interests/removeVote" + data + "'></a>";
                     } else {
-                        return "<a class='glyphicon glyphicon-eye-open' href='/ScholarMapClean/reference/view" + data + "'></a>";
+                        return "<a class='glyphicon glyphicon-eye-open' href='/ScholarMap/reference/view" + data + "'></a>";
                     }
 
                 }
@@ -490,7 +490,7 @@ function setExploreReferenceDataTable() {
             {
                 "data": "id",
                 "mRender": function (data, type, full) {
-                    return "<a class='glyphicon glyphicon-eye-open' href='/ScholarMapClean/reference/view/" + data + "'></a>";
+                    return "<a class='glyphicon glyphicon-eye-open' href='/ScholarMap/reference/view/" + data + "'></a>";
                 }
             }
         ]

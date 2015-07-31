@@ -129,7 +129,7 @@ class UserController {
             if (userCommand.photo) {
                 userCommand.photo = uploadService.uploadFile(request, 'photo')
             }
-            bindData(user, params, [exclude: ['position'/*, 'specialization', 'department'*/]])
+            bindData(user, params, [exclude: ['position','department'/*, 'specialization', 'department'*/]])
             user.position = Position.findByName(params.position)
             //user.specialization = Specialization.findByTitle(params.specialization)
             user.department = Department.findByTitle(params.department)

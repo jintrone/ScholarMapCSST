@@ -51,7 +51,7 @@ class UserService {
         if (user.save(flush: true)) {
             log.info("Created user with id ${user.id}")
             addDefaultRole(user)
-            notificationService.sendInvitationToUser(user, password)
+            //notificationService.sendInvitationToUser(user, password)
             return user
         } else {
             log.error("User creation attempt failed")
@@ -74,11 +74,12 @@ class UserService {
                 loadUserCommand.email = fields?.get("email")
                 loadUserCommand.firstName = fields?.get("firstName")
                 loadUserCommand.lastName = fields?.get("lastName")
-                loadUserCommand.degreeInstitution = fields?.get("degreeInstitution")
-                loadUserCommand.degreeYear = fields?.get("degreeYear")
+                //loadUserCommand.degreeInstitution = fields?.get("degreeInstitution")
+                //loadUserCommand.degreeYear = fields?.get("degreeYear")
                 loadUserCommand.position = fields?.get("postition")
-                loadUserCommand.currentInstitution = fields?.get("currentInstitution")
-                loadUserCommand.schoolOrDepartment = fields?.get("schoolOrDepartment")
+                loadUserCommand.position = fields?.get("department")
+                //loadUserCommand.currentInstitution = fields?.get("currentInstitution")
+                //loadUserCommand.schoolOrDepartment = fields?.get("schoolOrDepartment")
 
                 println "Processing command ${loadUserCommand}"
                 if (loadUserCommand.validate()) {
@@ -87,21 +88,23 @@ class UserService {
                     user.firstName = loadUserCommand.firstName
                     user.lastName = loadUserCommand.lastName
                     user.username = GeneralUtils.createUsername(user.firstName,user.lastName,user.email)
-                    user.degreeYear = loadUserCommand.degreeYear
+                    //user.degreeYear = loadUserCommand.degreeYear
                     def password = makeRandomPassword()
                     user.password = password
+                    println "${user.username};${user.password}"
                     user.enabled = true
-                    user.currentInstitution = loadUserCommand.currentInstitution
-                    user.schoolOrDepartment = loadUserCommand.schoolOrDepartment
+                    //user.currentInstitution = loadUserCommand.currentInstitution
+                    //user.schoolOrDepartment = loadUserCommand.schoolOrDepartment
                     user.position = loadUserCommand.position ? Position.findByNameLike(loadUserCommand.position) : user.position
-                    user.degreeInstitution = loadUserCommand.degreeInstitution
+                    user.position = loadUserCommand.position ? Department.findByTitleLike(loadUserCommand.department) : user.department
+                    //user.degreeInstitution = loadUserCommand.degreeInstitution
                     user.lockConf = new FieldLockConf()
                     user.visibilityConf = new FieldVisibilityConf()
 
                     if (user.save()) {
                         log.info("Created user with username: ${user.username}, id: ${user.id}")
                         addDefaultRole(user)
-                        notificationService.sendInvitationToUser(user, password)
+                        //notificationService.sendInvitationToUser(user, password)
                         println "Saves ${user.firstName}"
                     } else {
                         println "Fails ${user.firstName}"
@@ -122,11 +125,12 @@ class UserService {
     def updateProfile(RequiredFieldsCommand command, User user) {
         user.firstName = command.firstName ? command.firstName : user.firstName
         user.lastName = command.lastName ? command.lastName : user.lastName
-        user.degreeYear = command.degreeYear ? command.degreeYear : user.degreeYear
-        user.currentInstitution = command.currentInstitution ?:user.currentInstitution
-        user.schoolOrDepartment = command.schoolOrDepartment?:user.schoolOrDepartment
+//        user.degreeYear = command.degreeYear ? command.degreeYear : user.degreeYear
+//        user.currentInstitution = command.currentInstitution ?:user.currentInstitution
+//        user.schoolOrDepartment = command.schoolOrDepartment?:user.schoolOrDepartment
         user.position = command.position ? Position.findByName(command.position) : user.position
-        user.degreeInstitution = command.degreeInstitution?:user.degreeInstitution
+        user.department = command.department ? Department.findByTitleLike(command.department) : user.department
+        //user.degreeInstitution = command.degreeInstitution?:user.degreeInstitution
 
         if (user.save(flush: true)) {
             log.info("Updated user with id ${user.id}")

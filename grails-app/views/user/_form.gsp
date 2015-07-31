@@ -117,7 +117,7 @@
         </div>
 
         <div class="col-sm-6">
-            <g:select from="${csst15.lists.Department.list().name}" noSelection="['': 'Not set']"
+            <g:select from="${csst15.lists.Department.list().title}" noSelection="['': 'Not set']"
                       class="form-control" name="department" placeholder="Not set"
                       value="${user.department?.title}"/>
         </div>
