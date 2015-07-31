@@ -42,7 +42,7 @@ class GraphController extends RestfulController {
                                     name        : entity.name,
                                     type: entity.type.name,
                                     relative_url: csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath,entity),
-                                    people      : (ReferenceVote.findAllByEntity(entity).user.unique().id),
+                                    people      : UserEntity.findAllByEntity(entity).user.unique().id,
                                     references  :
                                             ReferenceVote.findAllByEntity(entity).reference.unique().collect {
                                                 [id: it.id, weight: ReferenceVote.countByReference(it)]
