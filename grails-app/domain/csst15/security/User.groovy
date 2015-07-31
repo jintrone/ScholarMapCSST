@@ -17,14 +17,14 @@ class User {
     String lastName
     String email
     String password
-    Integer degreeYear
-    String degreeInstitution
-    String currentInstitution
-    String schoolOrDepartment
+//    Integer degreeYear
+//    String degreeInstitution
+//    String currentInstitution
+//    String schoolOrDepartment
 
     //Specialization specialization
     Position position
-    //Department department
+    Department department
     byte[] photo
     boolean enabled
     boolean accountExpired
@@ -46,11 +46,12 @@ class User {
         firstName nullable: true
         lastName nullable: true
         email nullable: false, blank: false, unique: true, email: true
-        degreeInstitution nullable: true
-        currentInstitution nullable: true
-        schoolOrDepartment nullable: true
+//        degreeInstitution nullable: true
+//        currentInstitution nullable: true
+//        schoolOrDepartment nullable: true
         position nullable: true
-        degreeYear nullable: true, max: LocalDate.now().year
+        department nullable: true
+//        degreeYear nullable: true, max: LocalDate.now().year
         photo nullable: true, maxSize: 3 * 1024 * 1024
         activationToken nullable: true
         passwordResetToken nullable: true

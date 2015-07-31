@@ -16,7 +16,7 @@
 <br><br>
 
 <div class="welcome-message">
-    Welcome to the CSST ScholarMap.
+    Welcome to the MSU Communication Arts & Sciences ScholarMap.
     <br><br><br>
     Thanks for taking the time to login and fill out your profile.  You can access scholarmap at:
     <br><br>

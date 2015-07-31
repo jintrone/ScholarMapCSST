@@ -36,39 +36,6 @@
                             <g:hiddenField name="lastName" value="${user.lastName}"/>
                         </g:else>
 
-                        <g:if test="${!user.degreeYear && mandatoryFields.contains("degreeYear")}">
-                            <div class="form-group">
-                                <label for="lastName">Degree Year</label>
-                                <input type="text" class="form-control" name="degreeYear" id="degreeYear"
-                                       placeholder="Degree Year">
-                            </div>
-                        </g:if>
-                        <g:else>
-                            <g:hiddenField name="degreeYear" value="${user.degreeYear}"/>
-                        </g:else>
-
-                        <g:if test="${!user.institution && mandatoryFields.contains("institution")}">
-                            <div class="form-group">
-                                <label for="lastName">Institution</label>
-                                <input type="text" class="form-control" name="institution" id="institution"
-                                       placeholder="Institution">
-                            </div>
-                        </g:if>
-                        <g:else>
-                            <g:hiddenField name="institution" value="${user.institution}"/>
-                        </g:else>
-
-                        <g:if test="${!user.specialization && mandatoryFields.contains("specialization")}">
-                            <div class="form-group">
-                                <label for="lastName">Specialization</label>
-                                <g:select from="${Specialization.list().title}" noSelection="['': '']"
-                                          class="form-control" name="specialization" placeholder="Specialization"
-                                          value="${user.specialization?.title}"/>
-                            </div>
-                        </g:if>
-                        <g:else>
-                            <g:hiddenField name="specialization" value="${user.specialization?.title}"/>
-                        </g:else>
 
                         <g:if test="${!user.position && mandatoryFields.contains("position")}">
                             <div class="form-group">

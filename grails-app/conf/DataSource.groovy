@@ -21,9 +21,9 @@ environments {
             dbCreate = "update"
             pooled = true
             driverClassName = "com.mysql.jdbc.Driver"
-            username = "csst"
-            password = "csst"
-            url = "jdbc:mysql://localhost:3306/csst_v3"
+            username = "mi"
+            password = "mi"
+            url = "jdbc:mysql://localhost:3306/scholarmapmi"
             dialect = org.hibernate.dialect.MySQL5InnoDBDialect
             properties {
                 validationQuery = "select 1"
@@ -43,10 +43,10 @@ environments {
             dbCreate = "validate"
             pooled = true
             driverClassName = "com.mysql.jdbc.Driver"
-            username = "csst"
-            password = "csst"
+            username = "mi"
+            password = "mi"
             dbCreate = "update"
-            url = "jdbc:mysql://localhost:3306/csst_v3"
+            url = "jdbc:mysql://localhost:3306/scholarmapmi"
             dialect = org.hibernate.dialect.MySQL5InnoDBDialect
             properties {
                 validationQuery = "select 1"

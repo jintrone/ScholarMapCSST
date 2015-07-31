@@ -20,7 +20,7 @@
 
 <div class="welcome-message">
     Hi ${name},<br><br>
-    Welcome to ScholarMap.
+    Welcome to the MSU Communication Arts & Sciences ScholarMap.
     <br><br><br>
     <span class="important">Please take a moment to click <a style="font-weight:bolder;color: #1145b1"
                                                              href="${activationLink}">${activationLink}</a>

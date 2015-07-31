@@ -6,8 +6,8 @@ package csst15.constants
  */
 enum Departments {
     MEDIA('Media & Information'),
-    COMM('Comm'),
-    ADVERTISING('Advertising'),
+    COMM('Communications'),
+    ADVERTISING('Advertising & PR'),
     JOURNALISM('Journalism'),
     CSD('CSD')
 

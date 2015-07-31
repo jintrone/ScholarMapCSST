@@ -22,20 +22,20 @@ class HomeController {
     }
 
     def list() {
-        def columns = ['0': 'lastName', '1': 'currentInstitution', '2': 'name', '3':'schoolOrDepartment']
+        def columns = ['0': 'lastName', '1': 'position', '2': 'department']
         if (request.method == "POST") {
             def c = User.createCriteria()
             def allUsers = c.list(max: Integer.parseInt(params.length), offset: params.start) {
-                //createAlias('currentInstitution', 'i')
+                createAlias('department', 'd')
                 createAlias('position', 'p')
                 gt("id", 1L)
                 or {
 
                     ilike("firstName", "${params.'search[value]'}%")
                     ilike("lastName", "${params.'search[value]'}%")
-                    ilike("currentInstitution", "${params.'search[value]'}%")
+                    //ilike("currentInstitution", "${params.'search[value]'}%")
                     ilike("p.name", "${params.'search[value]'}%")
-                    ilike("schoolOrDepartment", "${params.'search[value]'}%")
+                    ilike("d.title", "${params.'search[value]'}%")
                 }
 
                  if (params.'order[0][column]' == '3') {
@@ -47,14 +47,16 @@ class HomeController {
             def count = User.createCriteria().count() {
                // createAlias('currentInstitution', 'i')
                 createAlias('position', 'p')
+                createAlias('department', 'd')
                 gt("id", 1L)
                 or {
 
                     ilike("firstName", "${params.'search[value]'}%")
                     ilike("lastName", "${params.'search[value]'}%")
-                    ilike("currentInstitution", "${params.'search[value]'}%")
+                    //ilike("currentInstitution", "${params.'search[value]'}%")
                     ilike("p.name", "${params.'search[value]'}%")
-                    ilike("schoolOrDepartment", "${params.'search[value]'}%")
+                    //ilike("schoolOrDepartment", "${params.'search[value]'}%")
+                    ilike("d.title", "${params.'search[value]'}%")
                 }
             }
 
@@ -63,13 +65,12 @@ class HomeController {
                     recordsTotal: allUsers.totalCount,
                     recordsFiltered: count,
                     data:
-                            allUsers.collect { user ->
+                            allUsers.collect { User user ->
                                 [
                                         username :"${user.username}",
                                         fullName  : "${user.firstName} ${user.lastName}",
-                                        currentInstitution: user.currentInstitution,
                                         position  : user.position?.name,
-                                        schoolOrDepartment : user.schoolOrDepartment
+                                        department : user.department?.title
                                 ]
                             }
             )

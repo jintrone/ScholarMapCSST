@@ -14,13 +14,13 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <p><b>ScholarMap</b> is intended to crowdsource the evolving definition of our diverse community.  Information
-                added by individual members is added to a shared pool that others reuse to define their own interests.
+                <p><b>ScholarMap</b> is intended to enable an overview of our evolving college.  Information
+                added by individual faculty and students is added to a shared pool that others reuse to define their own interests.
                 </p>
 
                 <p>
                     As data is accumulated, regions of significant overlap (or non-overlap) will become apparent. In the future, we will add
-                    network visualizations (such as the one at right) to enable rapid exploration of the data.
+                    more sophisticated visualizations and enable more sophisticated interactions with the data.
                 </p>
             </div>
 

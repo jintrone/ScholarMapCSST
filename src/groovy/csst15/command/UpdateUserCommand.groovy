@@ -15,14 +15,14 @@ class UpdateUserCommand {
     String email
     String firstName
     String lastName
-    Integer degreeYear
+   // Integer degreeYear
     //String institution
     //String specialization
     String position
-    //String department
-    String schoolOrDepartment
-    String currentInstitution
-    String degreeInstitution
+    String department
+    //String schoolOrDepartment
+    //String currentInstitution
+    //String degreeInstitution
 
     byte[] photo
 
@@ -42,19 +42,19 @@ class UpdateUserCommand {
                     return ['lastName.required']
             }
         }
-        currentInstitution nullable: true, validator: { val, obj ->
-            FieldMandatoryConf.withNewSession { session ->
-                if (FieldMandatoryConf.findByFieldName('currentInstitution')?.isMandatory && !val)
-                    return ['currentInstitution.required']
-            }
-        }
-
-       degreeInstitution nullable: true, validator: { val, obj ->
-            FieldMandatoryConf.withNewSession { session ->
-                if (FieldMandatoryConf.findByFieldName('degreeInstitution')?.isMandatory && !val)
-                    return ['degreeInstitution.required']
-            }
-        }
+//        currentInstitution nullable: true, validator: { val, obj ->
+//            FieldMandatoryConf.withNewSession { session ->
+//                if (FieldMandatoryConf.findByFieldName('currentInstitution')?.isMandatory && !val)
+//                    return ['currentInstitution.required']
+//            }
+//        }
+//
+//       degreeInstitution nullable: true, validator: { val, obj ->
+//            FieldMandatoryConf.withNewSession { session ->
+//                if (FieldMandatoryConf.findByFieldName('degreeInstitution')?.isMandatory && !val)
+//                    return ['degreeInstitution.required']
+//            }
+//        }
 
 
 //        degreeInstitution nullable: true
@@ -75,27 +75,29 @@ class UpdateUserCommand {
             }
         }
 
-        schoolOrDepartment nullable: true, validator: { val, obj ->
-            FieldMandatoryConf.withNewSession { session ->
-                if (FieldMandatoryConf.findByFieldName('schoolOrDepartment')?.isMandatory && !val)
-                    return ['schoolOrDepartment.required']
-            }
-        }
-
-
-
-//        department nullable: true, validator: { val, obj ->
+//        schoolOrDepartment nullable: true, validator: { val, obj ->
 //            FieldMandatoryConf.withNewSession { session ->
-//                if (FieldMandatoryConf.findByFieldName('department')?.isMandatory && !val)
-//                    return ['department.required']
+//                if (FieldMandatoryConf.findByFieldName('schoolOrDepartment')?.isMandatory && !val)
+//                    return ['schoolOrDepartment.required']
 //            }
 //        }
-        degreeYear nullable: true, max: LocalDate.now().year, validator: { val, obj ->
+
+
+
+        department nullable: true, validator: { val, obj ->
             FieldMandatoryConf.withNewSession { session ->
-                if (FieldMandatoryConf.findByFieldName('degreeYear')?.isMandatory && !val)
-                    return ['degreeYear.required']
+                if (FieldMandatoryConf.findByFieldName('department')?.isMandatory && !val)
+                    return ['department.required']
             }
         }
+
+
+//        degreeYear nullable: true, max: LocalDate.now().year, validator: { val, obj ->
+//            FieldMandatoryConf.withNewSession { session ->
+//                if (FieldMandatoryConf.findByFieldName('degreeYear')?.isMandatory && !val)
+//                    return ['degreeYear.required']
+//            }
+//        }
         photo nullable: true
     }
 }

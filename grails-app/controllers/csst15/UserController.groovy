@@ -118,7 +118,7 @@ class UserController {
 
         userCommand.position = Position.findByName(params.position)
         //userCommand.specialization = Specialization.findByTitle(params.specialization)
-        //userCommand.department = Department.findByTitle(params.department)
+        userCommand.department = Department.findByTitle(params.department)
 
 
         if (userCommand.hasErrors()) {
@@ -132,7 +132,7 @@ class UserController {
             bindData(user, params, [exclude: ['position'/*, 'specialization', 'department'*/]])
             user.position = Position.findByName(params.position)
             //user.specialization = Specialization.findByTitle(params.specialization)
-            //user.department = Department.findByTitle(params.department)
+            user.department = Department.findByTitle(params.department)
 
             User.withTransaction { status ->
                 try {

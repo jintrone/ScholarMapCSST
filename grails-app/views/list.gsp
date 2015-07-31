@@ -10,9 +10,8 @@
                 <tr>
 
                     <th>Full Name</th>
-                    <th>Current Institution</th>
                     <th>Position</th>
-                    <th>School / Department</th>
+                    <th>Home Department</th>
                 </tr>
                 </thead>
                 <tbody>

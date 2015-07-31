@@ -36,38 +36,21 @@ class BootStrap {
 
 
     private void bootstrapUserDetailsDatabase() {
-//        Department.withTransaction {
-//            Department.findByTitle(Departments.MEDIA.title) ?: new Department(title: Departments.MEDIA.title).save(failOnError: true)
-//            Department.findByTitle(Departments.COMM.title) ?: new Department(title: Departments.COMM.title).save(failOnError: true)
-//            Department.findByTitle(Departments.ADVERTISING.title) ?: new Department(title: Departments.ADVERTISING.title).save(failOnError: true)
-//            Department.findByTitle(Departments.JOURNALISM.title) ?: new Department(title: Departments.JOURNALISM.title).save(failOnError: true)
-//            Department.findByTitle(Departments.CSD.title) ?: new Department(title: Departments.CSD.title).save(failOnError: true)
-//        }
+        Department.withTransaction {
 
-        Position.withTransaction {
-            Position.findByName(Positions.PROFESSOR.name) ?: new Position(name: Positions.PROFESSOR.name).save(failOnError: true)
-            Position.findByName(Positions.ASSOCIATE_PROFESSOR.name) ?: new Position(name: Positions.ASSOCIATE_PROFESSOR.name).save(failOnError: true)
-            Position.findByName(Positions.ASSISTANT_PROFESSOR.name) ?: new Position(name: Positions.ASSISTANT_PROFESSOR.name).save(failOnError: true)
-            Position.findByName(Positions.FACULTY_OTHER.name) ?: new Position(name: Positions.FACULTY_OTHER.name).save(failOnError: true)
-            Position.findByName(Positions.INDUSTRY_RESEARCH.name) ?: new Position(name: Positions.INDUSTRY_RESEARCH.name).save(failOnError: true)
-            Position.findByName(Positions.PHD_STUDENT.name) ?: new Position(name: Positions.PHD_STUDENT.name).save(failOnError: true)
-            Position.findByName(Positions.MASTERS_STUDENT.name) ?: new Position(name: Positions.MASTERS_STUDENT.name).save(failOnError: true)
+            Departments.each {
+                Department.findByTitle(it.title) ?: new Department(title: it.title).save(failOnError: true)
+            }
+
         }
 
-//        Specialization.withTransaction {
-//            Specialization.findByTitle(Specializations.COMPUTER_SCIENCE.title) ?: new Specialization(title: Specializations.COMPUTER_SCIENCE.title).save(failOnError: true)
-//            Specialization.findByTitle(Specializations.ANTHROPOLOGY.title) ?: new Specialization(title: Specializations.ANTHROPOLOGY.title).save(failOnError: true)
-//            Specialization.findByTitle(Specializations.SOCIOLOGY.title) ?: new Specialization(title: Specializations.SOCIOLOGY.title).save(failOnError: true)
-//            Specialization.findByTitle(Specializations.COMMUNICATIONS.title) ?: new Specialization(title: Specializations.COMMUNICATIONS.title).save(failOnError: true)
-//            Specialization.findByTitle(Specializations.ECONOMICS.title) ?: new Specialization(title: Specializations.ECONOMICS.title).save(failOnError: true)
-//            Specialization.findByTitle(Specializations.GEOLOGY.title) ?: new Specialization(title: Specializations.GEOLOGY.title).save(failOnError: true)
-//            Specialization.findByTitle(Specializations.ADVERTISING.title) ?: new Specialization(title: Specializations.ADVERTISING.title).save(failOnError: true)
-//            Specialization.findByTitle(Specializations.JOURNALISM.title) ?: new Specialization(title: Specializations.JOURNALISM.title).save(failOnError: true)
-//            Specialization.findByTitle(Specializations.PSYCHOLOGY.title) ?: new Specialization(title: Specializations.PSYCHOLOGY.title).save(failOnError: true)
-//            Specialization.findByTitle(Specializations.SOCIAL_PSYCHOLOGY.title) ?: new Specialization(title: Specializations.SOCIAL_PSYCHOLOGY.title).save(failOnError: true)
-//            Specialization.findByTitle(Specializations.INFORMATION_SCIENCE.title) ?: new Specialization(title: Specializations.INFORMATION_SCIENCE.title).save(failOnError: true)
-//            Specialization.findByTitle(Specializations.FEMINISM.title) ?: new Specialization(title: Specializations.FEMINISM.title).save(failOnError: true)
-//        }
+        Position.withTransaction {
+           Positions.each {
+               Position.findByName(it.name) ?: new Position(name: it.name).save(failOnError: true)
+           }
+
+        }
+
 
         GeneralConf.withTransaction {
             GeneralConf.get(1) ?: new GeneralConf().save(failOnError: true)

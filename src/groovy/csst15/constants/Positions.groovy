@@ -8,8 +8,8 @@ enum Positions {
     PROFESSOR('Professor'),
     ASSOCIATE_PROFESSOR('Associate Professor'),
     ASSISTANT_PROFESSOR('Assistant Professor'),
-    FACULTY_OTHER('Other Faculty'),
-    INDUSTRY_RESEARCH('Industry Research'),
+    FIXED_TERM('Fixed Term'),
+    INSTRUCTOR('Instructor'),
     PHD_STUDENT('PhD Student'),
     MASTERS_STUDENT('Master\'s Student')
 

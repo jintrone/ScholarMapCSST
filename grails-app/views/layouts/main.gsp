@@ -25,7 +25,7 @@
                         class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span
                         class="icon-bar"></span></button>
                 <section class="logo text-center">
-                    <g:link controller="home" class="navbar-brand">ScholarMap</g:link>
+                    <g:link controller="home" class="navbar-brand">MSU Comm Arts &amp; Sci. ScholarMap</g:link>
                 </section>
             </div>
 

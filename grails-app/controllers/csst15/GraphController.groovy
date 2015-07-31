@@ -181,7 +181,7 @@ class GraphController extends RestfulController {
                         def userVenues = UserEntity.findAllByUser(u).entity.findAll { Entity venue -> venue.type == csst15.constants.EntityType.VENUE }.unique()
                         [
                                 name        : u.firstName + " " + u.lastName,
-                                institution  : u.currentInstitution?: "",
+                                department  : u.department?.title?: "",
                                 position    : u.position?.name?:"",
                                 relative_url: csst15.GeneralUtils.constructReferenceUrl(grailsLinkGenerator.contextPath, u),
                                 methods     : (userMethods.id),

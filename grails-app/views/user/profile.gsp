@@ -49,21 +49,7 @@
                                                 </li>
                                             </g:if>
 
-                                            <g:if test="${hasCurrentUser || user.visibilityConf.isCurrentInstitutionVisible}">
-                                                <li>
-                                                    <span class="icon glyphicon"></span>
-                                                    <label>Current Institution</label>
-                                                    ${user.currentInstitution}
-                                                </li>
-                                            </g:if>
 
-                                            <g:if test="${hasCurrentUser || user.visibilityConf.isSchoolOrDepartmentVisible}">
-                                                <li>
-                                                    <span class="icon glyphicon"></span>
-                                                    <label>School / Department</label>
-                                                    ${user.schoolOrDepartment}
-                                                </li>
-                                            </g:if>
                                             <g:if test="${hasCurrentUser || user.visibilityConf.isPositionVisible}">
                                                 <li>
                                                     <span class="icon glyphicon"></span>
@@ -72,20 +58,14 @@
                                                 </li>
                                             </g:if>
 
-                                            <g:if test="${hasCurrentUser || user.visibilityConf.isDegreeInstitutionVisible}">
+                                            <g:if test="${hasCurrentUser || user.visibilityConf.isDepartmentVisible}">
                                                 <li>
                                                     <span class="icon glyphicon"></span>
-                                                    <label>Degree Institution</label>
-                                                    ${user.degreeInstitution}
+                                                    <label>Home Department</label>
+                                                    ${user.department?.title}
                                                 </li>
                                             </g:if>
-                                            <g:if test="${hasCurrentUser || user.visibilityConf.isDegreeYearVisible}">
-                                                <li>
-                                                    <span class="icon glyphicon"></span>
-                                                    <label>Degree Year</label>
-                                                    ${user.degreeYear}
-                                                </li>
-                                            </g:if>
+
                                         </ul>
                                         <g:if test="${isOwner}">
                                             <g:link title="Edit Profile" controller="user" action="edit"

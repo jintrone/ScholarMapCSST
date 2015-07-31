@@ -8,14 +8,14 @@ class FieldVisibilityConf {
     Boolean isFirstNameVisible = true
     Boolean isLastNameVisible = true
     Boolean isEmailVisible = true
-    Boolean isDegreeYearVisible = true
-    Boolean isDegreeInstitutionVisible = true
+   // Boolean isDegreeYearVisible = true
+   // Boolean isDegreeInstitutionVisible = true
     //Boolean isSpecializationVisible = true
-    Boolean isCurrentInstitutionVisible = true
-    Boolean isSchoolOrDepartmentVisible = true
+    //Boolean isCurrentInstitutionVisible = true
+    //Boolean isSchoolOrDepartmentVisible = true
     Boolean isPositionVisible = true
 
-    //Boolean isDepartmentVisible = true
+    Boolean isDepartmentVisible = true
     Boolean isPhotoVisible = true
 
     static constraints = {

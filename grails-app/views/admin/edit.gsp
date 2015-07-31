@@ -1,4 +1,4 @@
-<%@ page import="csst15.lists.Position; csst15.lists.Department; csst15.lists.Specialization" %>
+<%@ page import="csst15.constants.Departments; csst15.lists.Position; csst15.lists.Department; csst15.lists.Specialization" %>
 <g:applyLayout name="main">
     <div class="panel panel-default" xmlns="http://www.w3.org/1999/html">
         <div class="panel-body">
@@ -92,40 +92,25 @@
 
                         <div class="form-group">
                             <div class="col-sm-3">
-                                <label for="degreeYear">Degree Year</label>
+                                <label for="department">Home Department</label>
                             </div>
 
                             <div class="col-sm-6">
-                                <g:textField type="text" class="form-control" name="degreeYear"
-                                       placeholder="Not set"
-                                       value="${user.degreeYear}"/>
+                                <g:select from="${Department.list().name}" noSelection="['': 'Not set']"
+                                          class="form-control" name="department" placeholder="Not set"
+                                          value="${user.department?.title}"/>
                             </div>
 
                             <div class="col-sm-3">
+                                %{--<p>Disable/Enable</p>--}%
                                 <label class="switch switch-success">
-                                    <input type="checkbox" id="isDegreeYearLocked"
-                                           class="lock" ${lockConf.isDegreeYearLocked ? 'checked="checked"' : ''}/><i></i>
+                                    <input type="checkbox" id="isDepartmentLocked"
+                                           class="lock" ${lockConf.isDepartmentLocked ? 'checked="checked"' : ''}/><i></i>
                                 </label>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-sm-3">
-                                <label for="currentInstitution">Current Institution</label>
-                            </div>
 
-                            <div class="col-sm-6">
-                                <g:textField type="text" class="form-control" name="currentInstitution" placeholder="Not set"
-                                       value="${user.currentInstitution}"/>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <label class="switch switch-success">
-                                    <input type="checkbox" id="isInstitutionLocked"
-                                           class="lock" ${lockConf.isCurrentInstitutionLocked ? 'checked="checked"' : ''}/><i></i>
-                                </label>
-                            </div>
-                        </div>
 
 
                         <div class="form-group">
@@ -148,24 +133,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-sm-3">
-                                <label for="schoolOrDepartment">School / Department</label>
-                            </div>
 
-                            <div class="col-sm-6">
-                                <g:textField type="text" class="form-control" name="schoolOrDepartment" placeholder="Not set"
-                                             value="${user.schoolOrDepartment}"/>
-                            </div>
-
-                            <div class="col-sm-3">
-                                %{--<p>Disable/Enable</p>--}%
-                                <label class="switch switch-success">
-                                    <input type="checkbox" id="isSchoolOrDepartmentLocked"
-                                           class="lock" ${lockConf.isSchoolOrDepartmentLocked ? 'checked="checked"' : ''}/><i></i>
-                                </label>
-                            </div>
-                        </div>
 
                         <button type="submit"
                                 class="btn btn-default btn-block btn-lg"

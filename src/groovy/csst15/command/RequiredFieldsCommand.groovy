@@ -13,12 +13,13 @@ import org.joda.time.LocalDate
 class RequiredFieldsCommand {
     String firstName
     String lastName
-    Integer degreeYear
-    String degreeInstitution
-    String currentInstitution
+    //Integer degreeYear
+//    String degreeInstitution
+//    String currentInstitution
     //String specialization
     String position
-    String schoolOrDepartment
+    String department
+   // String schoolOrDepartment
 
     static constraints = {
         firstName nullable: true, validator: { val, obj ->
@@ -34,19 +35,19 @@ class RequiredFieldsCommand {
                     return ['lastName.required']
             }
         }
-        currentInstitution nullable: true, validator: { val, obj ->
-            FieldMandatoryConf.withNewSession { session ->
-                if (FieldMandatoryConf.findByFieldName('currentInstitution')?.isMandatory && !val)
-                    return ['currentInstitution.required']
-            }
-        }
-
-        degreeInstitution nullable: true, validator: { val, obj ->
-            FieldMandatoryConf.withNewSession { session ->
-                if (FieldMandatoryConf.findByFieldName('degreeInstitution')?.isMandatory && !val)
-                    return ['degreeInstitution.required']
-            }
-        }
+//        currentInstitution nullable: true, validator: { val, obj ->
+//            FieldMandatoryConf.withNewSession { session ->
+//                if (FieldMandatoryConf.findByFieldName('currentInstitution')?.isMandatory && !val)
+//                    return ['currentInstitution.required']
+//            }
+//        }
+//
+//        degreeInstitution nullable: true, validator: { val, obj ->
+//            FieldMandatoryConf.withNewSession { session ->
+//                if (FieldMandatoryConf.findByFieldName('degreeInstitution')?.isMandatory && !val)
+//                    return ['degreeInstitution.required']
+//            }
+//        }
 //        specialization nullable: true, validator: { val, obj ->
 //            FieldMandatoryConf.withNewSession { session ->
 //                if (FieldMandatoryConf.findByFieldName('specialization')?.isMandatory && !val)
@@ -59,17 +60,26 @@ class RequiredFieldsCommand {
                     return ['position.required']
             }
         }
-        schoolOrDepartment nullable: true, validator: { val, obj ->
+
+        department nullable: true, validator: { val, obj ->
             FieldMandatoryConf.withNewSession { session ->
-                if (FieldMandatoryConf.findByFieldName('schoolOrDepartment')?.isMandatory && !val)
-                    return ['schoolOrDepartment.required']
+                if (FieldMandatoryConf.findByFieldName('department')?.isMandatory && !val)
+                    return ['department.required']
             }
         }
-        degreeYear nullable: true, max: LocalDate.now().year, validator: { val, obj ->
-            FieldMandatoryConf.withNewSession { session ->
-                if (FieldMandatoryConf.findByFieldName('degreeYear')?.isMandatory && !val)
-                    return ['degreeYear.required']
-            }
-        }
+
+
+//        schoolOrDepartment nullable: true, validator: { val, obj ->
+//            FieldMandatoryConf.withNewSession { session ->
+//                if (FieldMandatoryConf.findByFieldName('schoolOrDepartment')?.isMandatory && !val)
+//                    return ['schoolOrDepartment.required']
+//            }
+//        }
+//        degreeYear nullable: true, max: LocalDate.now().year, validator: { val, obj ->
+//            FieldMandatoryConf.withNewSession { session ->
+//                if (FieldMandatoryConf.findByFieldName('degreeYear')?.isMandatory && !val)
+//                    return ['degreeYear.required']
+//            }
+//        }
     }
 }

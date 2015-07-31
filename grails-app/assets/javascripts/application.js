@@ -361,9 +361,9 @@ function setUsersDataTable() {
                     return "<a href='/ScholarMapClean/user/" + full.username + "'>" + data + "</a>";
                 }
             },
-            {"data": "currentInstitution"},
+
             {"data": "position"},
-            {"data": "schoolOrDepartment"}
+            {"data": "department"}
         ]
     });
 }

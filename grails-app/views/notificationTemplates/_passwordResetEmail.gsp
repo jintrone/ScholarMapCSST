@@ -20,7 +20,7 @@
 
 <div class="password-reset-message">
     Hi ${name},<br><br>
-    Please click on the following link to reset your password:<br>
+    Please click on the following link to reset your ScholarMap password:<br>
     <a href="${passwordResetLink}">${[passwordResetLink]}</a>
     <br><br>
 </div>
